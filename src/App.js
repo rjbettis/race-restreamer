@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Container } from 'react-bootstrap';
+import Player from './components/Player';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      racerOne: 'retrocommunity',
+      racerTwo: 'retrocommunity',
+      racerThree: 'retrocommunity',
+      racerFour: 'retrocommunity',
+      streamOne: 'retrocommunity',
+      settings: {
+        volume: '0.5',
+        lowQuality: '360p30',
+        highQuality: 'chunked',
+      },
+    };
+
+    this.racerOne = this.racerOne.bind(this);
+    this.racerTwo = this.racerTwo.bind(this);
+    this.racerThree = this.racerThree.bind(this);
+    this.racerFour = this.racerFour.bind(this);
+  }
+
+  racerOne(channel) {
+    this.setState({ streamOne: this.state.racerOne });
+  }
+
+  racerTwo(channel) {
+    this.setState({ streamOne: this.state.racerTwo });
+  }
+
+  racerThree(channel) {
+    this.setState({ streamOne: this.state.racerThree });
+  }
+
+  racerFour(channel) {
+    this.setState({ streamOne: this.state.racerFour });
+  }
+
+  render() {
+    return (
+      <Container>
+        <Player
+          key={this.state.streamOne}
+          channel={this.state.streamOne}
+          settings={this.state.settings}
+          racerOne={this.racerOne}
+          racerTwo={this.racerTwo}
+          racerThree={this.racerThree}
+          racerFour={this.racerFour}
+        />
+      </Container>
+    );
+  }
 }
 
 export default App;

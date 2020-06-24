@@ -3,55 +3,56 @@ import { Container, Button } from 'react-bootstrap';
 
 class SwapBtns extends Component {
   render() {
-    const { id } = this.props;
     return (
+      /*
+
+      TURN THIS INTO A MAPPING
+
+
+      */
+
       <Container>
         <Button
-          className="btn btn-remove"
-          id={id}
-          onClick={() => this.racerOne(id)}
+          className="btn btn-remove mx-1 my-1"
+          onClick={() =>
+            this.changeRacer(this.props.racers[0], this.props.streamNum)
+          }
         >
-          Racer 1
+          {this.props.racers[0]}
         </Button>
 
         <Button
-          className="btn btn-remove"
-          id={id}
-          onClick={() => this.racerTwo(id)}
+          className="btn btn-remove mx-1 my-1"
+          onClick={() =>
+            this.changeRacer(this.props.racers[1], this.props.streamNum)
+          }
         >
-          Racer 2
+          {this.props.racers[1]}
         </Button>
 
         <Button
-          className="btn btn-remove"
-          id={id}
-          onClick={() => this.racerThree(id)}
+          className="btn btn-remove mx-1 my-1"
+          onClick={() =>
+            this.changeRacer(this.props.racers[2], this.props.streamNum)
+          }
         >
-          Racer 3
+          {this.props.racers[2]}
         </Button>
 
         <Button
-          className="btn btn-remove"
-          id={id}
-          onClick={() => this.racerFour(id)}
+          className="btn btn-remove mx-1 my-1"
+          onClick={() =>
+            this.changeRacer(this.props.racers[3], this.props.streamNum)
+          }
         >
-          Racer 4
+          {this.props.racers[3]}
         </Button>
         <br />
       </Container>
     );
   }
-  racerOne(streamOne) {
-    this.props.racerOne(streamOne);
-  }
-  racerTwo(streamOne) {
-    this.props.racerTwo(streamOne);
-  }
-  racerThree(streamOne) {
-    this.props.racerThree(streamOne);
-  }
-  racerFour(streamOne) {
-    this.props.racerFour(streamOne);
+  changeRacer(racer, streamNum) {
+    this.props.changeRacer(racer, this.props.streamNum);
   }
 }
 

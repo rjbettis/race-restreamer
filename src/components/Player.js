@@ -5,16 +5,12 @@ import SwapBtns from './SwapBtns';
 class Player extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      player: null,
-    };
   }
 
   componentDidMount() {
     var options = {
-      width: 640,
-      height: 360,
+      width: 720,
+      height: 405,
       channel: this.props.streamName,
       muted: true,
     };
@@ -23,21 +19,24 @@ class Player extends Component {
   }
   render() {
     return (
-      <Container>
+      <React.Fragment>
         <Row>
-          <Col>
-            {this.props.streamName}
+          <Col xl="auto">
             <SwapBtns
               streamNum={this.props.streamNum}
               streamName={this.props.streamName}
               changeRacer={this.props.changeRacer}
               racers={this.props.racers}
+              activeStreams={this.props.activeStreams}
             />
+          </Col>
+          <Col>
+            {this.props.streamName}
 
             <Container className="stream" id={this.props.streamName} />
           </Col>
         </Row>
-      </Container>
+      </React.Fragment>
     );
   }
 }

@@ -1,58 +1,63 @@
 import React, { Component } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import {
+  Button,
+  ButtonGroup,
+  Container,
+  ToggleButtonGroup,
+  ToggleButton,
+} from 'react-bootstrap';
 
 class SwapBtns extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeStreams: this.props.activeStreams,
+    };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.activeStreams !== nextProps.activeStreams) {
+      this.setState({ activeStreams: nextProps.activeStreams });
+    }
+    return true;
+  }
+
+  changeRacer(racer, streamNum, racerIndex) {
+    this.props.changeRacer(racer, this.props.streamNum, racerIndex);
+  }
+
   render() {
     return (
-      /*
-
-      TURN THIS INTO A MAPPING
-
-
-      */
-
-      <Container>
-        <Button
-          className="btn btn-remove mx-1 my-1"
-          onClick={() =>
-            this.changeRacer(this.props.racers[0], this.props.streamNum)
-          }
+      <React.Fragment>
+        <ToggleButtonGroup
+          key={this.state.activeStreams}
+          vertical
+          className="btn btn-block zero-padding"
+          type="radio"
+          name="options"
+          defaultValue={this.props.activeStreams}
         >
-          {this.props.racers[0]}
-        </Button>
-
-        <Button
-          className="btn btn-remove mx-1 my-1"
-          onClick={() =>
-            this.changeRacer(this.props.racers[1], this.props.streamNum)
-          }
-        >
-          {this.props.racers[1]}
-        </Button>
-
-        <Button
-          className="btn btn-remove mx-1 my-1"
-          onClick={() =>
-            this.changeRacer(this.props.racers[2], this.props.streamNum)
-          }
-        >
-          {this.props.racers[2]}
-        </Button>
-
-        <Button
-          className="btn btn-remove mx-1 my-1"
-          onClick={() =>
-            this.changeRacer(this.props.racers[3], this.props.streamNum)
-          }
-        >
-          {this.props.racers[3]}
-        </Button>
-        <br />
-      </Container>
+          {this.props.racers.map((btn, index) => (
+            <ToggleButton
+              key={index}
+              size="sm"
+              variant="secondary"
+              value={index}
+              onClick={() =>
+                this.changeRacer(
+                  this.props.racers[index],
+                  this.props.streamNum,
+                  this.props.racers.indexOf(this.props.racers[index])
+                )
+              }
+            >
+              {this.props.racers[index]}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
+      </React.Fragment>
     );
-  }
-  changeRacer(racer, streamNum) {
-    this.props.changeRacer(racer, this.props.streamNum);
   }
 }
 

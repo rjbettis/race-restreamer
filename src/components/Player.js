@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
-import SwapBtn from './SwapBtn';
+import { Container, Row, Col } from 'react-bootstrap';
+import SwapBtns from './SwapBtns';
 
 class Player extends Component {
   constructor(props) {
@@ -12,30 +12,79 @@ class Player extends Component {
   }
 
   componentDidMount() {
-    var options = {
-      width: 533,
-      height: 300,
-      channel: this.props.channel,
+    var optionsOne = {
+      width: 640,
+      height: 360,
+      channel: this.props.streamOne,
+      muted: true,
     };
-    var player = new window.Twitch.Player(this.props.channel, options);
-    player.setVolume(this.props.settings.volume);
-    player.setQuality(this.props.settings.lowQuality);
-    player.setMuted(true);
-    player.disableCaptions();
+    var optionsTwo = {
+      width: 640,
+      height: 360,
+      channel: this.props.streamTwo,
+      muted: true,
+    };
+    var optionsThree = {
+      width: 640,
+      height: 360,
+      channel: this.props.streamThree,
+      muted: true,
+    };
+    var optionsFour = {
+      width: 640,
+      height: 360,
+      channel: this.props.streamFour,
+      muted: true,
+    };
 
-    //this.setState({ player: player });
+    this.player = new window.Twitch.Player('player1', optionsOne);
+    this.player2 = new window.Twitch.Player('player2', optionsTwo);
+    this.player3 = new window.Twitch.Player('player3', optionsThree);
+    this.player4 = new window.Twitch.Player('player4', optionsFour);
   }
   render() {
     return (
-      <Container className="stream" id={this.props.channel}>
-        <SwapBtn
-          id={this.props.channel}
-          action="Remove"
-          racerOne={this.props.racerOne}
-          racerTwo={this.props.racerTwo}
-          racerThree={this.props.racerThree}
-          racerFour={this.props.racerFour}
-        />
+      <Container fluid={true}>
+        <Row>
+          <Col>
+            <SwapBtns
+              racerOne={this.props.racerOne}
+              racerTwo={this.props.racerTwo}
+              racerThree={this.props.racerThree}
+              racerFour={this.props.racerFour}
+            />
+            <Container className="stream" id="player1" />
+          </Col>
+          <Col>
+            <SwapBtns
+              racerOne={this.props.racerOne}
+              racerTwo={this.props.racerTwo}
+              racerThree={this.props.racerThree}
+              racerFour={this.props.racerFour}
+            />
+            <Container className="stream" id="player2" />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Container className="stream" id="player3" />
+            <SwapBtns
+              racerOne={this.props.racerOne}
+              racerTwo={this.props.racerTwo}
+              racerThree={this.props.racerThree}
+              racerFour={this.props.racerFour}
+            />
+          </Col>
+          <Col>
+            <Container className="stream" id="player4" />
+            <SwapBtns
+              racerOne={this.props.racerOne}
+              racerTwo={this.props.racerTwo}
+              racerThree={this.props.racerThree}
+              racerFour={this.props.racerFour}
+            />
+          </Col>
+        </Row>
       </Container>
     );
   }

@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import Player from './components/Player';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      racerOne: 'retrocommunity',
-      racerTwo: 'retrocommunity',
-      racerThree: 'retrocommunity',
-      racerFour: 'retrocommunity',
-      streamOne: 'retrocommunity',
+      racerOne: 'glitchcat7',
+      racerTwo: 'darbian',
+      racerThree: 'authorblues',
+      racerFour: 'daikon',
+      streamOne: 'glitchcat7',
+      streamTwo: 'darbian',
+      streamThree: 'authorblues',
+      streamFour: 'daikon',
       settings: {
-        volume: '0.5',
-        lowQuality: '360p30',
+        volume: '0.25',
+        lowQuality: '720p',
         highQuality: 'chunked',
       },
     };
@@ -24,28 +29,31 @@ class App extends Component {
     this.racerFour = this.racerFour.bind(this);
   }
 
-  racerOne(channel) {
+  racerOne(streamOne) {
     this.setState({ streamOne: this.state.racerOne });
   }
 
-  racerTwo(channel) {
+  racerTwo(streamOne) {
     this.setState({ streamOne: this.state.racerTwo });
   }
 
-  racerThree(channel) {
+  racerThree(streamOne) {
     this.setState({ streamOne: this.state.racerThree });
   }
 
-  racerFour(channel) {
+  racerFour(streamOne) {
     this.setState({ streamOne: this.state.racerFour });
   }
 
   render() {
     return (
-      <Container>
+      <Container fluid={true}>
         <Player
           key={this.state.streamOne}
-          channel={this.state.streamOne}
+          streamOne={this.state.streamOne}
+          streamTwo={this.state.streamTwo}
+          streamThree={this.state.streamThree}
+          streamFour={this.state.streamFour}
           settings={this.state.settings}
           racerOne={this.racerOne}
           racerTwo={this.racerTwo}

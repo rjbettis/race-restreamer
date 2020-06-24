@@ -1,57 +1,58 @@
 import React, { Component } from 'react';
+import { Container, Button } from 'react-bootstrap';
 
-class SwapBtn extends Component {
+class SwapBtns extends Component {
   render() {
     const { id } = this.props;
     return (
-      <React.Fragment>
-        <button
+      <Container>
+        <Button
           className="btn btn-remove"
           id={id}
           onClick={() => this.racerOne(id)}
         >
           Racer 1
-        </button>
-        <br />
-        <button
+        </Button>
+
+        <Button
           className="btn btn-remove"
           id={id}
           onClick={() => this.racerTwo(id)}
         >
           Racer 2
-        </button>
-        <br />
-        <button
+        </Button>
+
+        <Button
           className="btn btn-remove"
           id={id}
           onClick={() => this.racerThree(id)}
         >
           Racer 3
-        </button>
-        <br />
-        <button
+        </Button>
+
+        <Button
           className="btn btn-remove"
           id={id}
           onClick={() => this.racerFour(id)}
         >
           Racer 4
-        </button>
+        </Button>
         <br />
-      </React.Fragment>
+      </Container>
     );
   }
-  racerOne(channel) {
-    this.props.racerOne(channel);
+  racerOne(streamOne) {
+    this.props.racerOne(streamOne);
   }
-  racerTwo(channel) {
-    this.props.racerTwo(channel);
+  racerTwo(streamOne) {
+    this.props.racerTwo(streamOne);
   }
-  racerThree(channel) {
-    this.props.racerThree(channel);
+  racerThree(streamOne) {
+    this.props.racerThree(streamOne);
   }
-  racerFour(channel) {
-    this.props.racerFour(channel);
+  racerFour(streamOne) {
+    this.props.racerFour(streamOne);
   }
 }
 
-export default SwapBtn;
+export default SwapBtns;

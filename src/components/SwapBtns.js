@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  ToggleButtonGroup,
-  ToggleButton,
-} from 'react-bootstrap';
+import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 
 class SwapBtns extends Component {
   constructor(props) {
@@ -33,13 +27,14 @@ class SwapBtns extends Component {
         <ToggleButtonGroup
           key={this.state.activeStreams}
           vertical
-          className="btn btn-block zero-padding"
+          className="btn btn-block zeroPadding"
           type="radio"
           name="options"
           defaultValue={this.props.activeStreams}
         >
           {this.props.racers.map((btn, index) => (
             <ToggleButton
+              className="button"
               key={index}
               size="sm"
               variant="secondary"

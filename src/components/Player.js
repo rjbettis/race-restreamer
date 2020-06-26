@@ -3,14 +3,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import SwapBtns from './SwapBtns';
 
 class Player extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     var options = {
-      width: 720,
-      height: 405,
+      width: 640,
+      height: 360,
       channel: this.props.streamName,
       muted: true,
     };
@@ -19,9 +15,9 @@ class Player extends Component {
   }
   render() {
     return (
-      <React.Fragment>
+      <Container className="zeroPadding">
         <Row>
-          <Col xl="auto">
+          <Col xl={3}>
             <SwapBtns
               streamNum={this.props.streamNum}
               streamName={this.props.streamName}
@@ -31,12 +27,14 @@ class Player extends Component {
             />
           </Col>
           <Col>
-            {this.props.streamName}
-
-            <Container className="stream" id={this.props.streamName} />
+            <label className="playerLabel">{this.props.streamName}</label>
+            <Container
+              className="stream zeroPadding"
+              id={this.props.streamName}
+            />
           </Col>
         </Row>
-      </React.Fragment>
+      </Container>
     );
   }
 }

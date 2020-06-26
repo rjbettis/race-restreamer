@@ -1,11 +1,42 @@
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 .gray {
   background-color: gray;
 }
 
 .red {
-  background-color: red;
+  color: red;
 }
 
 .blue {
   background-color: blue;
+}
+
+.green {
+  color: green;
+}
+
+.zeroPadding {
+  margin: 0px;
+}
+
+.button {
+  font-size: 12px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 30px;
+}
+
+.playerMargin {
+  margin-top: 10px;
+}
+
+.playerLabel {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.buttonMargin {
 }

@@ -3,25 +3,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Player from './Player';
 import update from 'immutability-helper';
 
-class Layout extends Component {
+class RaceLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      racers: [
-        'grandpoobear',
-        'dode',
-        'andrewg',
-        'pedrothelion',
-        'petedorr',
-        'endyswe',
-        'the_widdler',
-        'linkdeadx2',
-        'hayesmaker64',
-      ],
-      streamOne: 'grandpoobear',
-      streamTwo: 'dode',
-      streamThree: 'andrewg',
-      streamFour: 'pedrothelion',
+      racers: this.props.location.state.channelList,
+      streamOne: this.props.location.state.channelList[0],
+      streamTwo: this.props.location.state.channelList[1],
+      streamThree: this.props.location.state.channelList[2],
+      streamFour: this.props.location.state.channelList[3],
       activeStreams: [0, 1, 2, 3],
     };
 
@@ -81,11 +71,13 @@ class Layout extends Component {
   }
 
   render() {
+    console.log(this.props.location.state.channelList);
+    console.log(this.props.location.state.channelList[0]);
     return (
-      <React.Fragment>
-        <Row>
-          <Col>
-            <React.Fragment>
+      <Container fluid={true} className="zeroPadding">
+        <Row xl={2}>
+          <Col xl={6}>
+            <Container fluid={true} className="zeroPadding playerMargin">
               <Player
                 key={this.state.streamOne}
                 streamNum="1"
@@ -94,10 +86,10 @@ class Layout extends Component {
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
               />
-            </React.Fragment>
+            </Container>
           </Col>
-          <Col>
-            <React.Fragment>
+          <Col xl={6}>
+            <Container fluid={true} className="zeroPadding playerMargin">
               <Player
                 key={this.state.streamTwo}
                 streamNum="2"
@@ -106,12 +98,12 @@ class Layout extends Component {
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
               />
-            </React.Fragment>
+            </Container>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <React.Fragment>
+        <Row xl={2}>
+          <Col xl={6}>
+            <Container fluid={true} className="zeroPadding playerMargin">
               <Player
                 key={this.state.streamThree}
                 streamNum="3"
@@ -120,10 +112,10 @@ class Layout extends Component {
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
               />
-            </React.Fragment>
+            </Container>
           </Col>
-          <Col>
-            <React.Fragment>
+          <Col xl={6}>
+            <Container fluid={true} className="zeroPadding playerMargin">
               <Player
                 key={this.state.streamFour}
                 streamNum="4"
@@ -132,12 +124,12 @@ class Layout extends Component {
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
               />
-            </React.Fragment>
+            </Container>
           </Col>
         </Row>
-      </React.Fragment>
+      </Container>
     );
   }
 }
 
-export default Layout;
+export default RaceLayout;

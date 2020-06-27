@@ -38,5 +38,19 @@ body {
   font-size: 22px;
 }
 
-.buttonMargin {
+.formLabel {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.formMargin {
+  margin-top: 10px;
+}
+
+.buildStreamBtn {
+  margin-top: 30px;
+}
+
+.greenSuccessText {
+  margin-bottom: 15px;
 }

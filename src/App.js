@@ -1,7 +1,9 @@
-import React, { Component, Container } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Input from './components/Input';
-import RaceLayout from './components/RaceLayout';
+import RaceLayoutTwo from './components/RaceLayoutTwo';
+import RaceLayoutThree from './components/RaceLayoutThree';
+import RaceLayoutFour from './components/RaceLayoutFour';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -10,7 +12,9 @@ class App extends Component {
     return (
       <Router>
         <Route exact path="/" component={Input} />
-        <Route exact path="/RaceLayout" component={RaceLayout} />
+        <Route exact path="/RaceLayoutTwo" component={RaceLayoutTwo} />
+        <Route exact path="/RaceLayoutThree" component={RaceLayoutThree} />
+        <Route exact path="/RaceLayoutFour" component={RaceLayoutFour} />
       </Router>
     );
   }

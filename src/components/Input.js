@@ -42,7 +42,8 @@ class Input extends Component {
     } else {
       this.setState({ validChannel: false });
       this.setState({
-        userNotFound: this.state.submittedChannel + ' not found',
+        userNotFound:
+          this.state.submittedChannel + ' not found. Please try again.',
       });
     }
 
@@ -53,14 +54,18 @@ class Input extends Component {
     return (
       <Container>
         <Form id="inputForm" onSubmit={this.handleSearch}>
-          <Form.Label>Channel Name</Form.Label>
+          <Form.Label className="formLabel">
+            Enter the name of a twitch channel to add to the restream list.
+            Channel is not required to be live at the moment to be added.
+          </Form.Label>
           <Form.Control
-            placeholder="Enter channel name"
+            className="formMargin"
+            placeholder="Enter channel name (minimum of 4)"
             value={this.state.searchValue}
             onChange={(event) => this.handleOnChange(event)}
           />
           {this.state.validChannel ? (
-            <Form.Label className="green">
+            <Form.Label className="green greenSuccessText">
               {this.state.submittedChannel} is added to the list
             </Form.Label>
           ) : (
@@ -74,22 +79,60 @@ class Input extends Component {
             <br />
           </React.Fragment>
         ))}
+
         {this.state.channelList.length > 3 ? (
           <Link
             to={{
-              pathname: '/RaceLayout',
+              pathname: '/RaceLayoutFour',
               state: { channelList: this.state.channelList },
             }}
           >
-            <Button variant="secondary" size="lg" block>
+            <Button
+              variant="secondary"
+              size="lg"
+              block
+              className="buildStreamBtn"
+            >
               Build Restream Layout
             </Button>
           </Link>
-        ) : (
-          <Button variant="secondary" size="lg" block>
-            Build Restream Layout
-          </Button>
-        )}
+        ) : null}
+
+        {this.state.channelList.length === 3 ? (
+          <Link
+            to={{
+              pathname: '/RaceLayoutThree',
+              state: { channelList: this.state.channelList },
+            }}
+          >
+            <Button
+              variant="secondary"
+              size="lg"
+              block
+              className="buildStreamBtn"
+            >
+              Build Restream Layout
+            </Button>
+          </Link>
+        ) : null}
+
+        {this.state.channelList.length === 2 ? (
+          <Link
+            to={{
+              pathname: '/RaceLayoutTwo',
+              state: { channelList: this.state.channelList },
+            }}
+          >
+            <Button
+              variant="secondary"
+              size="lg"
+              block
+              className="buildStreamBtn"
+            >
+              Build Restream Layout
+            </Button>
+          </Link>
+        ) : null}
       </Container>
     );
   }

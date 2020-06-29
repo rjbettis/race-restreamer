@@ -35,7 +35,7 @@ class Player extends Component {
           muted: true,
         };
       }
-    } else if (this.props.racers.length === 4) {
+    } else if (this.props.racers.length > 3) {
       if (this.props.streamNum === '1') {
         options = {
           width: 640,

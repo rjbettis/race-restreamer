@@ -11,6 +11,7 @@ class Input extends Component {
       channelList: [],
       userNotFound: '',
       channelUrl: '',
+      commaListBool: null,
     };
   }
 
@@ -18,11 +19,58 @@ class Input extends Component {
     this.setState({ searchValue: event.target.value });
   };
 
+  convertToArray(searchValue) {
+    var array = searchValue.split(',');
+
+    array.map((element, index) => (array[index] = element.trim()));
+
+    return array;
+  }
+
   handleSearch = (e) => {
     e.preventDefault();
-    this.setState({ submittedChannel: this.state.searchValue });
-    this.makeApiCall(this.state.searchValue);
+
+    var array = this.state.searchValue.split(',');
+
+    if (array.length > 1) {
+      this.setState({
+        separatedArray: this.convertToArray(this.state.searchValue),
+      });
+      this.mapApiCall(this.convertToArray(this.state.searchValue));
+    } else {
+      this.setState({ submittedChannel: this.state.searchValue });
+      this.makeApiCall(this.state.searchValue);
+    }
   };
+
+  async makeApiCallOnArray(channel) {
+    const response = await fetch(
+      `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/verify-channel?channel=${channel}`
+    );
+
+    const res = await response.json();
+
+    this.setState({ channelResponse: res });
+
+    if (res._total === 1) {
+      this.setState({ validChannel: true });
+
+      let list = [...this.state.channelList];
+      list.push(channel);
+      this.setState({ channelList: list });
+    } else {
+      this.setState({ validChannel: false });
+      this.setState({
+        userNotFound: channel + ' not found. Please try again.',
+      });
+    }
+  }
+
+  mapApiCall(separatedArray) {
+    separatedArray.map((channel) => {
+      this.makeApiCallOnArray(channel);
+    });
+  }
 
   async makeApiCall(searchValue) {
     const response = await fetch(
@@ -60,7 +108,7 @@ class Input extends Component {
           </Form.Label>
           <Form.Control
             className="formMargin"
-            placeholder="Enter channel name (minimum of 4)"
+            placeholder="Enter channel name"
             value={this.state.searchValue}
             onChange={(event) => this.handleOnChange(event)}
           />

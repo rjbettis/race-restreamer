@@ -13,6 +13,8 @@ class RaceLayoutFour extends Component {
       streamThree: this.props.location.state.channelList[2],
       streamFour: this.props.location.state.channelList[3],
       activeStreams: [0, 1, 2, 3],
+      height: window.innerHeight,
+      width: window.innerWidth,
     };
 
     this.changeRacer = this.changeRacer.bind(this);
@@ -71,11 +73,15 @@ class RaceLayoutFour extends Component {
   }
 
   render() {
+    var width = window.innerWidth;
+    console.log(width);
+    var height = window.innerHeight;
+    console.log(height);
     return (
-      <Container fluid={true} className="zeroPadding">
-        <Row xl={2}>
-          <Col xl={6}>
-            <Container fluid={true} className="zeroPadding playerMargin">
+      <Container fluid={true}>
+        <Row>
+          <Col>
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamOne}
                 streamNum="1"
@@ -83,11 +89,13 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
               />
             </Container>
           </Col>
-          <Col xl={6}>
-            <Container fluid={true} className="zeroPadding playerMargin">
+          <Col>
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamTwo}
                 streamNum="2"
@@ -95,13 +103,15 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
               />
             </Container>
           </Col>
         </Row>
-        <Row xl={2}>
-          <Col xl={6}>
-            <Container fluid={true} className="zeroPadding playerMargin">
+        <Row>
+          <Col>
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamThree}
                 streamNum="3"
@@ -109,11 +119,13 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
               />
             </Container>
           </Col>
-          <Col xl={6}>
-            <Container fluid={true} className="zeroPadding playerMargin">
+          <Col>
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamFour}
                 streamNum="4"
@@ -121,6 +133,8 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
               />
             </Container>
           </Col>

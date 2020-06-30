@@ -55,3 +55,8 @@ body {
 .greenSuccessText {
   margin-bottom: 15px;
 }
+
+.zeroPaddingMarigin {
+  margin: 0px;
+  padding: 0px;
+}

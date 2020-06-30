@@ -72,7 +72,7 @@ class Input extends Component {
   }
 
   mapArrayApiCall(separatedArray) {
-    separatedArray.map((channel) => {
+    separatedArray.forEach((channel) => {
       this.makeApiCallOnArray(channel);
     });
   }
@@ -80,7 +80,7 @@ class Input extends Component {
   makeCaseSensiteName() {
     let caseSensitiveName;
 
-    this.state.channelResponse.users.map((name) => {
+    this.state.channelResponse.users.forEach((name) => {
       caseSensitiveName = name.display_name;
     });
 

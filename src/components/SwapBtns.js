@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 class SwapBtns extends Component {
   constructor(props) {
@@ -22,37 +22,7 @@ class SwapBtns extends Component {
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <ToggleButtonGroup
-          key={this.state.activeStreams}
-          vertical
-          className="btn btn-block zeroPadding"
-          type="radio"
-          name="options"
-          defaultValue={this.props.activeStreams}
-        >
-          {this.props.racers.map((btn, index) => (
-            <ToggleButton
-              className="button"
-              key={index}
-              size="sm"
-              variant="secondary"
-              value={index}
-              onClick={() =>
-                this.changeRacer(
-                  this.props.racers[index],
-                  this.props.streamNum,
-                  this.props.racers.indexOf(this.props.racers[index])
-                )
-              }
-            >
-              {this.props.racers[index]}
-            </ToggleButton>
-          ))}
-        </ToggleButtonGroup>
-      </React.Fragment>
-    );
+    return <Container></Container>;
   }
 }
 

@@ -7,11 +7,8 @@ class Input extends Component {
     super(props);
     this.state = {
       searchValue: '',
-      submittedChannel: '',
-      channelList: [],
-      validList: [],
-      invalidList: [],
-      channelUrl: '',
+      validChannels: [],
+      invalidChannels: [],
     };
   }
 
@@ -19,105 +16,46 @@ class Input extends Component {
     this.setState({ searchValue: event.target.value });
   };
 
-  convertToArray(searchValue) {
-    var array = searchValue.split(',');
-
-    array.map((element, index) => (array[index] = element.trim()));
-
-    return array;
-  }
-
   handleSearch = (e) => {
     e.preventDefault();
 
-    var array = this.state.searchValue.split(',');
+    //trim comma'd input and remove whitespace
+    let separatedArray = this.state.searchValue.split(',');
+    separatedArray.forEach(
+      (element, index) => (separatedArray[index] = element.trim())
+    );
 
-    if (array.length > 1) {
-      this.setState({
-        separatedArray: this.convertToArray(this.state.searchValue),
-      });
-      this.mapArrayApiCall(this.convertToArray(this.state.searchValue));
-    } else {
-      this.setState({ submittedChannel: this.state.searchValue });
-      this.makeApiCall(this.state.searchValue);
-    }
+    //makes API call on every channel in the separatedArray
+    separatedArray.forEach((channel) => {
+      this.makeApiCall(channel);
+    });
   };
 
   /*
-   * Runs when user inputs a comma separated list
+   * Makes API calls and builds valid and invalid channel lists.
    */
-  async makeApiCallOnArray(channel) {
+  async makeApiCall(channel) {
     const response = await fetch(
       `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/verify-channel?channel=${channel}`
     );
-
     const res = await response.json();
 
-    this.setState({ channelResponse: res });
+    if (res._total > 0) {
+      let caseSensitiveName;
+      res.users.forEach((name) => {
+        caseSensitiveName = name.display_name;
+      });
 
-    if (res._total === 1) {
-      let list = [...this.state.channelList];
-      list.push(channel);
-      this.setState({ channelList: list });
-
-      let validList = [...this.state.validList];
-      let caseSensitiveName = this.makeCaseSensiteName(); //gets case sensitive name from api results
-      validList.push(caseSensitiveName + ' is added to the list'); //push case sensitive name to validList
-      this.setState({ validList: validList });
+      let validChannels = [...this.state.validChannels];
+      validChannels.push(caseSensitiveName);
+      this.setState({ validChannels: validChannels });
     } else {
-      let invalidList = [...this.state.invalidList];
-      invalidList.push(channel + ' not found. Please try again.');
-      this.setState({ invalidList: invalidList });
-    }
-  }
-
-  mapArrayApiCall(separatedArray) {
-    separatedArray.forEach((channel) => {
-      this.makeApiCallOnArray(channel);
-    });
-  }
-
-  makeCaseSensiteName() {
-    let caseSensitiveName;
-
-    this.state.channelResponse.users.forEach((name) => {
-      caseSensitiveName = name.display_name;
-    });
-
-    return caseSensitiveName;
-  }
-
-  /*
-   * Runs when user inputs a single channel
-   */
-  async makeApiCall(searchValue) {
-    const response = await fetch(
-      `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/verify-channel?channel=${searchValue}`
-    );
-
-    const res = await response.json();
-
-    this.setState({ channelResponse: res });
-
-    if (res._total === 1) {
-      //channel list that builds race layout
-      let list = [...this.state.channelList];
-      list.push(this.state.submittedChannel);
-      this.setState({ channelList: list });
-
-      //if username is not valid add status to invalid list
-      let validList = [...this.state.validList];
-      let caseSensitiveName = this.makeCaseSensiteName(); //gets case sensitive name from api results
-      validList.push(caseSensitiveName + ' is added to the list'); //push case sensitive name to validList
-      this.setState({ validList: validList });
-    } else {
-      let invalidList = [...this.state.invalidList];
-      invalidList.push(
-        this.state.submittedChannel + ' not found. Please try again.'
-      );
-      this.setState({ invalidList: invalidList });
+      let invalidChannels = [...this.state.invalidChannels];
+      invalidChannels.push(channel);
+      this.setState({ invalidChannels: invalidChannels });
     }
 
+    //clears search bar
     this.setState({ searchValue: '' });
   }
 
@@ -145,14 +83,13 @@ class Input extends Component {
             </Col>
           </Form.Row>
         </Form>
-
         <Row>
           <Col>
             <h5 className="formMargin">Valid Channels</h5>
-            {this.state.validList.map((channel, index) => (
+            {this.state.validChannels.map((channel, index) => (
               <Container>
                 <label className="green" key={index}>
-                  {channel}
+                  {channel + ' '}is added to the list.
                 </label>
                 <br />
               </Container>
@@ -160,22 +97,21 @@ class Input extends Component {
           </Col>
           <Col>
             <h5 className="formMargin">Invalid Channels</h5>
-            {this.state.invalidList.map((channel, index) => (
+            {this.state.invalidChannels.map((channel, index) => (
               <Container>
                 <label className="red" key={index}>
-                  {channel}
+                  {channel + ' '}not found. Please try again.
                 </label>
                 <br />
               </Container>
             ))}
           </Col>
         </Row>
-
-        {this.state.channelList.length > 3 ? (
+        {this.state.validChannels.length > 3 ? (
           <Link
             to={{
               pathname: '/RaceLayoutFour',
-              state: { channelList: this.state.channelList },
+              state: { validChannels: this.state.validChannels },
             }}
           >
             <Button
@@ -188,12 +124,11 @@ class Input extends Component {
             </Button>
           </Link>
         ) : null}
-
-        {this.state.channelList.length === 3 ? (
+        {this.state.validChannels.length === 3 ? (
           <Link
             to={{
               pathname: '/RaceLayoutThree',
-              state: { channelList: this.state.channelList },
+              state: { validChannels: this.state.validChannels },
             }}
           >
             <Button
@@ -206,12 +141,11 @@ class Input extends Component {
             </Button>
           </Link>
         ) : null}
-
-        {this.state.channelList.length === 2 ? (
+        {this.state.validChannels.length === 2 ? (
           <Link
             to={{
               pathname: '/RaceLayoutTwo',
-              state: { channelList: this.state.channelList },
+              state: { validChannels: this.state.validChannels },
             }}
           >
             <Button

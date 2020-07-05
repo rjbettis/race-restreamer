@@ -7,11 +7,11 @@ class RaceLayoutFour extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      racers: this.props.location.state.channelList,
-      streamOne: this.props.location.state.channelList[0],
-      streamTwo: this.props.location.state.channelList[1],
-      streamThree: this.props.location.state.channelList[2],
-      streamFour: this.props.location.state.channelList[3],
+      racers: this.props.location.state.validChannels,
+      streamOne: this.props.location.state.validChannels[0],
+      streamTwo: this.props.location.state.validChannels[1],
+      streamThree: this.props.location.state.validChannels[2],
+      streamFour: this.props.location.state.validChannels[3],
       activeStreams: [0, 1, 2, 3],
       height: window.innerHeight,
       width: window.innerWidth,

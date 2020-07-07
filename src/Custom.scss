@@ -1,0 +1,18 @@
+$body-bg: #576068;
+$body-color: #fff;
+
+$input-bg: #6d7882;
+$input-color: #c9d4de;
+$input-focus-bg: #2d3235;
+$input-border-color: #c9d4de;
+$input-placeholder-color: #383e42;
+
+$input-focus-border-color: #fff;
+
+$theme-colors: (
+  'secondary': #343a40,
+);
+
+$navbar-padding-y: 0;
+
+@import 'node_modules/bootstrap/scss/bootstrap';

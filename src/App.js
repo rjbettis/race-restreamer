@@ -4,7 +4,7 @@ import Input from './components/Input';
 import RaceLayoutTwo from './components/RaceLayoutTwo';
 import RaceLayoutThree from './components/RaceLayoutThree';
 import RaceLayoutFour from './components/RaceLayoutFour';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './Custom.scss';
 import './App.css';
 
 class App extends Component {

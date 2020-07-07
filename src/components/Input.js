@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
 
 class Input extends Component {
   constructor(props) {
@@ -61,108 +62,119 @@ class Input extends Component {
 
   userLink(userId) {
     return `/users/${this.state.validChannels}/`;
-}
+  }
 
   render() {
     return (
-      <Container>
-        <label className="formLabel">
-          Enter the name of a twitch channel to add to the restream list.
-          Channel is not required to be live at the moment to be added.
-        </label>
-        <Form id="inputForm" onSubmit={this.handleSearch}>
-          <Form.Row>
-            <Col xl={11}>
-              <Form.Control
-                className="formMargin"
-                placeholder="Enter channel name"
-                value={this.state.searchValue}
-                onChange={(event) => this.handleOnChange(event)}
-              />
+      <Container fluid={true} className="zeroPaddingMarigin">
+        <Navbar bg="dark" variant="dark">
+          <img className="nav-img" src="../../rr.ico" height="40" width="40" />
+          <Navbar.Brand className="large-nav" href="/">
+            Build New List
+          </Navbar.Brand>
+        </Navbar>
+
+        <Container>
+          <label className="formLabel">
+            Enter the name of a twitch channel to add to the restream list.
+            Channel is not required to be live at the moment to be added.
+          </label>
+          <Form id="inputForm" onSubmit={this.handleSearch}>
+            <Form.Row>
+              <Col xl={11}>
+                <Form.Control
+                  className="formMargin"
+                  value={this.state.searchValue}
+                  onChange={(event) => this.handleOnChange(event)}
+                />
+              </Col>
+              <Col xl="auto">
+                <Button
+                  type="submit"
+                  className="formMargin"
+                  variant="secondary"
+                >
+                  Submit
+                </Button>
+              </Col>
+            </Form.Row>
+          </Form>
+          <Row>
+            <Col>
+              <h5 className="formMargin">Valid Channels</h5>
+              {this.state.validChannels.map((channel, index) => (
+                <Container>
+                  <label className="green" key={index}>
+                    {channel + ' '}is added to the list.
+                  </label>
+                  <br />
+                </Container>
+              ))}
             </Col>
-            <Col xl="auto">
-              <Button type="submit" className="formMargin" variant="secondary">
-                Submit
+            <Col>
+              <h5 className="formMargin">Invalid Channels</h5>
+              {this.state.invalidChannels.map((channel, index) => (
+                <Container>
+                  <label className="red" key={index}>
+                    {channel + ' '}not found. Please try again.
+                  </label>
+                  <br />
+                </Container>
+              ))}
+            </Col>
+          </Row>
+          {this.state.validChannels.length > 3 ? (
+            <Link
+              to={{
+                pathname: `/RaceLayoutFour`,
+                search: `?streams=${this.state.validChannels}`,
+              }}
+            >
+              <Button
+                variant="secondary"
+                size="lg"
+                block
+                className="buildStreamBtn"
+              >
+                Build Restream Layout
               </Button>
-            </Col>
-          </Form.Row>
-        </Form>
-        <Row>
-          <Col>
-            <h5 className="formMargin">Valid Channels</h5>
-            {this.state.validChannels.map((channel, index) => (
-              <Container>
-                <label className="green" key={index}>
-                  {channel + ' '}is added to the list.
-                </label>
-                <br />
-              </Container>
-            ))}
-          </Col>
-          <Col>
-            <h5 className="formMargin">Invalid Channels</h5>
-            {this.state.invalidChannels.map((channel, index) => (
-              <Container>
-                <label className="red" key={index}>
-                  {channel + ' '}not found. Please try again.
-                </label>
-                <br />
-              </Container>
-            ))}
-          </Col>
-        </Row>
-        {this.state.validChannels.length > 3 ? (
-          <Link
-            to={{
-              pathname: `/RaceLayoutFour`,
-              search: `?streams=${this.state.validChannels}`
-            }}
-          >
-            
-            <Button
-              variant="secondary"
-              size="lg"
-              block
-              className="buildStreamBtn"
+            </Link>
+          ) : null}
+          {this.state.validChannels.length === 3 ? (
+            <Link
+              to={{
+                pathname: '/RaceLayoutThree',
+                state: { validChannels: this.state.validChannels },
+              }}
             >
-              Build Restream Layout
-            </Button>
-          </Link>
-        ) : null}
-        {this.state.validChannels.length === 3 ? (
-          <Link
-            to={{
-              pathname: '/RaceLayoutThree',
-              state: { validChannels: this.state.validChannels },
-            }}
-          >
-            <Button
-              variant="secondary"
-              size="lg"
-              block
-              className="buildStreamBtn"
+              <Button
+                variant="secondary"
+                size="lg"
+                block
+                className="buildStreamBtn"
+              >
+                Build Restream Layout
+              </Button>
+            </Link>
+          ) : null}
+          {this.state.validChannels.length === 2 ? (
+            <Link
+              to={{
+                pathname: '/RaceLayoutTwo',
+                state: { validChannels: this.state.validChannels },
+              }}
             >
-              Build Restream Layout
-            </Button>
-          </Link>
-        ) : null}
-        {this.state.validChannels.length === 2 ? (
-          <Link
-            to={{
-              pathname: '/RaceLayoutTwo',
-              state: { validChannels: this.state.validChannels },
-            }}
-          >
-            <Button
-              variant="secondary"
-              size="lg"
-              block
-              className="buildStreamBtn"
-            >
-              Build Restream Layout
-            </Button>
-          </Link>
-        ) : null}
+              <Button
+                variant="secondary"
+                size="lg"
+                block
+                className="buildStreamBtn"
+              >
+                Build Restream Layout
+              </Button>
+            </Link>
+          ) : null}
+        </Container>
       </Container>
     );
   }

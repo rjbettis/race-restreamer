@@ -83,7 +83,7 @@ class Player extends Component {
 
   render() {
     return (
-      <Container className="zeroPaddingMarigin">
+      <Container className="zeroPaddingMarigin ">
         {this.props.racers.length === 2 || this.props.racers.length === 3 ? (
           <Row>
             <Col>

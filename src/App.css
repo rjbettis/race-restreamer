@@ -2,48 +2,6 @@
   margin-right: 10px;
 }
 
-.large-nav:hover {
-  background-color: #5a636d;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.large-nav {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 10px;
-  padding-left: 10px;
-  font-size: 20px;
-}
-
-.small-nav:hover {
-  font-size: 14px;
-  height: 25px;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 2px;
-  padding-bottom: 3px;
-  background-color: #5a636d;
-}
-
-.small-nav {
-  font-size: 14px;
-  height: 25px;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 2px;
-  padding-bottom: 3px;
-}
-
-.small-nav-copy-text {
-  background-color: #8896a3;
-  font-size: 14px;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 2px;
-  padding-bottom: 3px;
-}
-
 .red {
   color: red;
 }
@@ -96,4 +54,8 @@
 
 .zeroPadding {
   padding: 0px;
+}
+
+.white {
+  background-color: white;
 }

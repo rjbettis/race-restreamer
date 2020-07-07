@@ -68,7 +68,13 @@ class Input extends Component {
     return (
       <Container fluid={true} className="zeroPaddingMarigin">
         <Navbar bg="dark" variant="dark">
-          <img className="nav-img" src="../../rr.ico" height="40" width="40" />
+          <img
+            className="nav-img"
+            src="../../rr.ico"
+            height="40"
+            width="40"
+            alt="img"
+          />
           <Navbar.Brand className="large-nav" href="/">
             Build New List
           </Navbar.Brand>

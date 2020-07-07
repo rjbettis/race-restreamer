@@ -7,17 +7,25 @@ class RaceLayoutFour extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      racers: this.props.location.state.validChannels,
-      streamOne: this.props.location.state.validChannels[0],
-      streamTwo: this.props.location.state.validChannels[1],
-      streamThree: this.props.location.state.validChannels[2],
-      streamFour: this.props.location.state.validChannels[3],
+      racers: this.parseQueryString(),
+      streamOne:  this.parseQueryString()[0],
+      streamTwo:  this.parseQueryString()[1],
+      streamThree: this.parseQueryString()[2],
+      streamFour: this.parseQueryString()[3],
       activeStreams: [0, 1, 2, 3],
       height: window.innerHeight,
       width: window.innerWidth,
     };
 
     this.changeRacer = this.changeRacer.bind(this);
+  }
+
+  parseQueryString() {
+    let query=this.props.location.search;
+    query = query.replace("?streams=", "")
+    query = query.split(',')
+    return query
+    
   }
 
   changeRacer(racer, streamNum, racerIndex) {

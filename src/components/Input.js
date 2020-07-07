@@ -59,6 +59,10 @@ class Input extends Component {
     this.setState({ searchValue: '' });
   }
 
+  userLink(userId) {
+    return `/users/${this.state.validChannels}/`;
+}
+
   render() {
     return (
       <Container>
@@ -110,10 +114,11 @@ class Input extends Component {
         {this.state.validChannels.length > 3 ? (
           <Link
             to={{
-              pathname: '/RaceLayoutFour',
-              state: { validChannels: this.state.validChannels },
+              pathname: `/RaceLayoutFour`,
+              search: `?streams=${this.state.validChannels}`
             }}
           >
+            
             <Button
               variant="secondary"
               size="lg"

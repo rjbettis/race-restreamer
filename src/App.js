@@ -14,7 +14,7 @@ class App extends Component {
         <Route exact path="/" component={Input} />
         <Route exact path="/RaceLayoutTwo" component={RaceLayoutTwo} />
         <Route exact path="/RaceLayoutThree" component={RaceLayoutThree} />
-        <Route exact path="/RaceLayoutFour" component={RaceLayoutFour} />
+        <Route path="/RaceLayoutFour" component={RaceLayoutFour} />
       </Router>
     );
   }

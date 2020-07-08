@@ -1,16 +1,15 @@
-$body-bg: #576068;
-$body-color: #fff;
+$body-bg: #F7F7F9;
+$body-color: #000000;
 
-$input-bg: #6d7882;
-$input-color: #c9d4de;
-$input-focus-bg: #2d3235;
-$input-border-color: #c9d4de;
-$input-placeholder-color: #383e42;
+$input-bg: #c5c5c7;
+$input-color: #000000;
+$input-focus-bg: #949495;
+$input-border-color: #c5c5c7;
 
 $input-focus-border-color: #fff;
 
 $theme-colors: (
-  'secondary': #343a40,
+  'secondary': #4a4a4a,
 );
 
 @import 'node_modules/bootstrap/scss/bootstrap';

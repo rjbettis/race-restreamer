@@ -67,7 +67,7 @@ class Input extends Component {
   render() {
     return (
       <Container fluid={true} className="zeroPaddingMarigin">
-        <Navbar bg="dark" variant="dark">
+        <Navbar className="color-nav" variant="dark">
           <img
             className="nav-img"
             src="../../rr.ico"

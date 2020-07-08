@@ -70,7 +70,7 @@ class Input extends Component {
         <Navbar className="color-nav" variant="dark">
           <img
             className="nav-img"
-            src="../../rr.ico"
+            src="https://race-restream.s3.amazonaws.com/RR.png"
             height="40"
             width="40"
             alt="img"
@@ -82,8 +82,7 @@ class Input extends Component {
 
         <Container>
           <label className="formLabel">
-            Enter the name of a twitch channel to add to the restream list.
-            Channel is not required to be live at the moment to be added.
+            Enter channel names individually or as a comma separated list.
           </label>
           <Form id="inputForm" onSubmit={this.handleSearch}>
             <Form.Row>

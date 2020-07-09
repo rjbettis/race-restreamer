@@ -13,6 +13,35 @@
   padding-bottom: 0px;
 }
 
+.padding-top {
+  padding-right: 0px;
+  padding-left: 0px;
+  padding-top: 17px;
+  padding-bottom: 0px;
+}
+
+.player-container {
+  padding-bottom: 50px;
+  height: 100%;
+}
+
+.left-padding {
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.left-right-padding {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.left-top-padding {
+  padding-right: 0px;
+  padding-top: 17px;
+  padding-bottom: 0px;
+}
+
 .swap-button-padding-left {
   padding-right: 0px;
   padding-left: 5px;
@@ -32,6 +61,10 @@
   margin-left: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.left-margin {
+  margin-left: 10px;
 }
 
 .form-control:focus {
@@ -68,6 +101,7 @@
   display: inline-block;
   vertical-align: top;
   margin-top: 30px;
+  text-align: left;
 }
 
 .playerMargin {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { ToggleButtonGroup, ToggleButton, Row, Col } from 'react-bootstrap';
 
 class SwapButtons extends Component {
   constructor(props) {
@@ -22,18 +22,18 @@ class SwapButtons extends Component {
   }
 
   render() {
-    return (
+    return this.props.racers.length < 21 ? (
       <ToggleButtonGroup
         key={this.state.activeStreams}
         vertical
-        className="btn btn-block no-padding"
+        className="btn padding-top"
         type="radio"
         name="options"
         defaultValue={this.props.activeStreams}
       >
         {this.props.racers.map((btn, index) => (
           <ToggleButton
-            className="button no-padding"
+            className="button left-right-padding"
             key={index}
             size="sm"
             variant="secondary"
@@ -50,6 +50,77 @@ class SwapButtons extends Component {
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
+    ) : (
+      <Row>
+        <Col>
+          {/*
+           * left button group
+           */}
+          <ToggleButtonGroup
+            key={this.state.activeStreams}
+            vertical
+            className="btn padding-top"
+            type="radio"
+            name="options"
+            defaultValue={this.props.activeStreams}
+          >
+            {this.props.racers.map((btn, index) =>
+              index < 20 ? (
+                <ToggleButton
+                  className="button left-padding"
+                  key={index}
+                  size="sm"
+                  variant="secondary"
+                  value={index}
+                  onClick={() =>
+                    this.changeRacer(
+                      this.props.racers[index],
+                      this.props.streamNum,
+                      this.props.racers.indexOf(this.props.racers[index])
+                    )
+                  }
+                >
+                  {this.props.racers[index].slice(0, 9) + '...'}
+                </ToggleButton>
+              ) : null
+            )}
+          </ToggleButtonGroup>
+        </Col>
+        <Col>
+          {/*
+           * right button group
+           */}
+          <ToggleButtonGroup
+            key={this.state.activeStreams}
+            vertical
+            className="btn padding-top"
+            type="radio"
+            name="options"
+            defaultValue={this.props.activeStreams}
+          >
+            {this.props.racers.map((btn, index) =>
+              index > 19 ? (
+                <ToggleButton
+                  className="button left-padding"
+                  key={index}
+                  size="sm"
+                  variant="secondary"
+                  value={index}
+                  onClick={() =>
+                    this.changeRacer(
+                      this.props.racers[index],
+                      this.props.streamNum,
+                      this.props.racers.indexOf(this.props.racers[index])
+                    )
+                  }
+                >
+                  {this.props.racers[index].slice(0, 9) + '...'}
+                </ToggleButton>
+              ) : null
+            )}
+          </ToggleButtonGroup>
+        </Col>
+      </Row>
     );
   }
 }

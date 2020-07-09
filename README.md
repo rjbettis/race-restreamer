@@ -79,9 +79,10 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Minimize states and code for 4 channel race layout
 - [x] Increase modularity
 - [x] Design clean, minimal styling for easy OBS captures
-- [ ] Allow swapping 4 channels being currently displayed
+- [x] Create 1 or 2 columns of buttons based on channel array length
+- [ ] Click on a current channel & switch positions
 - [ ] Improve math formula to determine player size based on window height
-- [ ] Resize and create button columns based on racer array length
+- [ ] Sass conditionals for dynamic button size rendering for different resolutions/scales
 - [ ] Fix 2 and 3 race layout
 
 ### Player

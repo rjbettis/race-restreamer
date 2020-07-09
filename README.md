@@ -94,3 +94,7 @@ React web application with a bootstrap frontend and AWS backend.
 ### Advanced Input
 
 - [ ] Determine advanced layout functionality before making this todo list
+
+### Misc
+
+- [ ] Write a better Project Description

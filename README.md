@@ -20,7 +20,7 @@ React web application with a bootstrap frontend and AWS backend.
 8. AWS Route 53
 9. Twitch API
 
-## Pages & Components
+## Pages
 
 1. Home
    - Input channel names individually or by a comma separated list.
@@ -30,7 +30,7 @@ React web application with a bootstrap frontend and AWS backend.
 ## Components
 
 1. Input
-   - Provides a form for channel input. When submited the app makes an API call to the backend to run a lambda function to verify the channel exists and checks the response. Channels are added to an array and passed to child components.
+   - Provides a form for channel input. When submitted the app makes an API call to the backend to run a lambda function to verify the channel exists and checks the response. Channels are added to an array and passed to child components.
 2. RaceLayoutFour
    - Reads the channel array and renders a layout for a 4+ person race.
 3. RaceLayoutThree

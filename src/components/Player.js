@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  ToggleButtonGroup,
-  ToggleButton,
-} from 'react-bootstrap';
-//import SwapBtns from './SwapBtns';
-//import withSizes from 'react-sizes';
+import { Container, Row, Col } from 'react-bootstrap';
+import SwapButtons from './SwapButtons';
 
 class Player extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      activeSt1ams: this.props.activeStreams,
+      activeStreams: this.props.activeStreams,
     };
   }
 
   componentDidMount() {
     var options;
+    let height = (this.props.windowHeight / 2) * 0.863121186;
+    let width = height * (16 / 9);
     if (this.props.racers.length === 2) {
       if (this.props.streamNum === '1') {
         options = {
@@ -53,14 +48,14 @@ class Player extends Component {
     } else if (this.props.racers.length > 3) {
       if (this.props.streamNum === '1') {
         options = {
-          width: (this.props.windowWidth / 2) * 0.733333333,
-          height: (this.props.windowHeight / 2) * 0.863121186,
+          width: width,
+          height: height,
           channel: this.props.streamName,
         };
       } else {
         options = {
-          width: (this.props.windowWidth / 2) * 0.733333333,
-          height: (this.props.windowHeight / 2) * 0.863121186,
+          width: width,
+          height: height,
           channel: this.props.streamName,
           muted: true,
         };
@@ -78,58 +73,27 @@ class Player extends Component {
   }
 
   changeRacer(racer, streamNum, racerIndex) {
-    this.props.changeRacer(racer, this.props.streamNum, racerIndex);
+    this.props.changeRacer(racer, streamNum, racerIndex);
   }
 
   render() {
     return (
-      <Container className="zeroPaddingMarigin ">
-        {this.props.racers.length === 2 || this.props.racers.length === 3 ? (
-          <Row>
-            <Col>
-              <label className="playerLabel">{this.props.streamName}</label>
-              <Container id={this.props.streamName} />
-            </Col>
-          </Row>
-        ) : null}
+      <Container className="no-padding">
+        <Row xl={2}>
+          <Col xl={2} className="swap-button-padding-left">
+            <SwapButtons
+              activeStreams={this.props.activeStreams}
+              racers={this.props.racers}
+              streamNum={this.props.streamNum}
+              changeRacer={this.props.changeRacer}
+            />
+          </Col>
 
-        {this.props.racers.length > 3 ? (
-          <Row xl={2}>
-            <Col xl={2}>
-              <ToggleButtonGroup
-                key={this.state.activeStreams}
-                vertical
-                className="btn btn-block zeroPadding"
-                type="radio"
-                name="options"
-                defaultValue={this.props.activeStreams}
-              >
-                {this.props.racers.map((btn, index) => (
-                  <ToggleButton
-                    className="button"
-                    key={index}
-                    size="sm"
-                    variant="secondary"
-                    value={index}
-                    onClick={() =>
-                      this.changeRacer(
-                        this.props.racers[index],
-                        this.props.streamNum,
-                        this.props.racers.indexOf(this.props.racers[index])
-                      )
-                    }
-                  >
-                    {this.props.racers[index]}
-                  </ToggleButton>
-                ))}
-              </ToggleButtonGroup>
-            </Col>
-            <Col>
-              <label className="playerLabel">{this.props.streamName}</label>
-              <Container id={this.props.streamName} />
-            </Col>
-          </Row>
-        ) : null}
+          <Col xl={10}>
+            <label className="playerLabel">{this.props.streamName}</label>
+            <Container id={this.props.streamName} />
+          </Col>
+        </Row>
       </Container>
     );
   }

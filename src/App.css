@@ -6,6 +6,34 @@
   background-color: #4a4a4a;
 }
 
+.no-padding {
+  padding-right: 0px;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.swap-button-padding-left {
+  padding-right: 0px;
+  padding-left: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.swap-button-padding-right {
+  padding-right: 0px;
+  padding-left: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.no-margin {
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .form-control:focus {
   border-color: #c5c5c7;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
@@ -16,8 +44,15 @@
   color: red;
 }
 
+.orange {
+  background-color: orange;
+}
+
 .blue {
   background-color: blue;
+}
+.yellow {
+  background-color: yellow;
 }
 
 .green {

@@ -1,68 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Easily restream speedrun and blind races on twitch.](https://racerestream.com)
 
-## Available Scripts
+## Project Description
 
-In the project directory, you can run:
+This web application provides a clean layout to capture 4 embedded twitch players in order to restream speedrun and blind races. The typical way to do this is for every racer to stream directly to an RTMP server for the restream channel to capture for live commentary. If an RTMP server is not available the next option is for all the racers to stream to their own channel, open up numerous twitch windows and capture them individually in OBS, while also using OBS to swap between racers during the race.
 
-### `yarn start`
+Race Restream simplifies the process by allowing the restreamer to capture a single browser source and never having to touch OBS to swap around channels.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies Utilized
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+React web application with a bootstrap frontend and AWS backend.
 
-### `yarn test`
+1. Create React App
+2. React Bootstrap front-end framework
+3. React Router
+4. AWS API Gateway
+5. Lambda
+6. AWS S3
+7. AWS CloudFront
+8. AWS Route 53
+9. Twitch API
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Pages & Components
 
-### `yarn build`
+1. Home
+   - Input channel names individually or by a comma separated list.
+2. Layout
+   - Will render a 2, 3 or 4 player layout and a group of buttons to swap around channels.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Components
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. Input
+   - Provides a form for channel input. When submited the app makes an API call to the backend to run a lambda function to verify the channel exists and checks the response. Channels are added to an array and passed to child components.
+2. RaceLayoutFour
+   - Reads the channel array and renders a layout for a 4+ person race.
+3. RaceLayoutThree
+   - Reads the channel array and renders a layout for a 3 person race.
+4. RaceLayoutTwo
+   - Reads the channel array and renders a layout for a 2 person race.
+5. SwapButtons
+   - Reads the channel array and renders toggle buttons to swap between channels.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Todo
 
-### `yarn eject`
+### Home Page
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [ ] Make home page to concisely describe application function
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Main Functionality
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [x] Make simple layouts that do not require an account
+- [ ] User accounts (login through twitch API)
+- [ ] Make component to build and customize a layout
+- [ ] Make advanced layout component
+- [ ] Layout saving
+- [ ] Demo
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Simple Input
 
-## Learn More
+- [x] Make input UI
+- [x] Update Serverless yml file to initialize API Gateway and Lambda function
+- [x] Write Lambda function to check if channel exists
+- [x] Write API call function
+- [x] Display validation results
+- [x] Parse comma separated channel list and split into array
+- [x] Update API call function to handle array of channels
+- [x] Basic Styling
+- [x] Use react router to initialize channel list from query string
+- [ ] Add profile images and design a better looking lists
+- [ ] Check for duplicate channel and prevent insert
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Race Layouts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [x] Make 2 channel race layout
+- [x] Make 3 channel race layout
+- [x] Make 4 channel race layout
+- [x] Write logic for swapping channels
+- [x] Render player size dynamically based on window height
+- [x] Minimize states and code for 4 channel race layout
+- [x] Increase modularity
+- [x] Design clean, minimal styling for easy OBS captures
+- [ ] Allow swapping 4 channels being currently displayed
+- [ ] Improve math formula to determine player size based on window height
+- [ ] Resize and create button columns based on racer array length
+- [ ] Fix 2 and 3 race layout
 
-### Code Splitting
+### Player
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- [x] Make player component to handle embedded options and player object initialization
+- [x] Add buttons to swap channels
+- [x] Update player container on channel swap
+- [x] Move buttons to new component to increase modularity
 
-### Analyzing the Bundle Size
+### Advanced Input
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [ ] Determine advanced layout functionality before making this todo list

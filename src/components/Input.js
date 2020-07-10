@@ -131,7 +131,7 @@ class Input extends Component {
           {this.state.validChannels.length > 3 ? (
             <Link
               to={{
-                pathname: `/RaceLayoutFour`,
+                pathname: `/Layout4`,
                 search: `?streams=${this.state.validChannels}`,
               }}
             >
@@ -148,8 +148,8 @@ class Input extends Component {
           {this.state.validChannels.length === 3 ? (
             <Link
               to={{
-                pathname: '/RaceLayoutThree',
-                state: { validChannels: this.state.validChannels },
+                pathname: '/Layout3',
+                search: `?streams=${this.state.validChannels}`,
               }}
             >
               <Button
@@ -165,8 +165,8 @@ class Input extends Component {
           {this.state.validChannels.length === 2 ? (
             <Link
               to={{
-                pathname: '/RaceLayoutTwo',
-                state: { validChannels: this.state.validChannels },
+                pathname: '/Layout2',
+                search: `?streams=${this.state.validChannels}`,
               }}
             >
               <Button

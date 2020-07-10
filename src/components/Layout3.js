@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Player from './Player';
 import update from 'immutability-helper';
 
-class RaceLayoutFour extends Component {
+class Layout3 extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,10 +11,7 @@ class RaceLayoutFour extends Component {
       streamOne: this.parseQueryString()[0],
       streamTwo: this.parseQueryString()[1],
       streamThree: this.parseQueryString()[2],
-      streamFour: this.parseQueryString()[3],
-      activeStreams: [0, 1, 2, 3],
-      height: window.innerHeight,
-      width: window.innerWidth,
+      activeStreams: [0, 1, 2],
     };
 
     this.changeRacer = this.changeRacer.bind(this);
@@ -64,18 +61,6 @@ class RaceLayoutFour extends Component {
           2: { $set: racerIndex },
         }),
       });
-    } else if (
-      streamNum === '4' &&
-      racer !== this.state.streamOne &&
-      racer !== this.state.streamTwo &&
-      racer !== this.state.streamThree
-    ) {
-      this.setState({
-        streamFour: racer,
-        activeStreams: update(this.state.activeStreams, {
-          3: { $set: racerIndex },
-        }),
-      });
     }
   }
 
@@ -87,8 +72,8 @@ class RaceLayoutFour extends Component {
 
     return (
       <Container fluid={true}>
-        <Row>
-          <Col>
+        <Row xl={2}>
+          <Col xl={6}>
             <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamOne}
@@ -99,10 +84,11 @@ class RaceLayoutFour extends Component {
                 activeStreams={this.state.activeStreams}
                 windowWidth={this.state.width}
                 windowHeight={this.state.height}
+                layout={3}
               />
             </Container>
           </Col>
-          <Col>
+          <Col xl={6}>
             <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamTwo}
@@ -113,11 +99,12 @@ class RaceLayoutFour extends Component {
                 activeStreams={this.state.activeStreams}
                 windowWidth={this.state.width}
                 windowHeight={this.state.height}
+                layout={3}
               />
             </Container>
           </Col>
         </Row>
-        <Row>
+        <Row xl={2} className="justify-content-md-center">
           <Col>
             <Container className="zeroPaddingMarigin">
               <Player
@@ -129,27 +116,14 @@ class RaceLayoutFour extends Component {
                 activeStreams={this.state.activeStreams}
                 windowWidth={this.state.width}
                 windowHeight={this.state.height}
+                layout={3}
               />
             </Container>
           </Col>
-          <Col>
-            <Container className="zeroPaddingMarigin">
-              <Player
-                key={this.state.streamFour}
-                streamNum="4"
-                streamName={this.state.streamFour}
-                racers={this.state.racers}
-                changeRacer={this.changeRacer}
-                activeStreams={this.state.activeStreams}
-                windowWidth={this.state.width}
-                windowHeight={this.state.height}
-              />
-            </Container>
-          </Col>
-        </Row>{' '}
+        </Row>
       </Container>
     );
   }
 }
 
-export default RaceLayoutFour;
+export default Layout3;

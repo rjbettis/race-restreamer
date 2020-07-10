@@ -3,17 +3,24 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Player from './Player';
 import update from 'immutability-helper';
 
-class RaceLayoutFour extends Component {
+class Layout2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      racers: this.props.location.state.channelList,
-      streamOne: this.props.location.state.channelList[0],
-      streamTwo: this.props.location.state.channelList[1],
+      racers: this.parseQueryString(),
+      streamOne: this.parseQueryString()[0],
+      streamTwo: this.parseQueryString()[1],
       activeStreams: [0, 1],
     };
 
     this.changeRacer = this.changeRacer.bind(this);
+  }
+
+  parseQueryString() {
+    let query = this.props.location.search;
+    query = query.replace('?streams=', '');
+    query = query.split(',');
+    return query;
   }
 
   changeRacer(racer, streamNum, racerIndex) {
@@ -45,11 +52,15 @@ class RaceLayoutFour extends Component {
   }
 
   render() {
+    var width = window.innerWidth;
+    console.log(width);
+    var height = window.innerHeight;
+    console.log(height);
     return (
-      <Container fluid={true} className="zeroPadding">
+      <Container fluid={true}>
         <Row xl={2}>
           <Col xl={6}>
-            <Container fluid={true} className="zeroPadding playerMargin">
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamOne}
                 streamNum="1"
@@ -57,11 +68,14 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
+                layout={2}
               />
             </Container>
           </Col>
           <Col xl={6}>
-            <Container fluid={true} className="zeroPadding playerMargin">
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamTwo}
                 streamNum="2"
@@ -69,6 +83,9 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
+                layout={2}
               />
             </Container>
           </Col>
@@ -78,4 +95,4 @@ class RaceLayoutFour extends Component {
   }
 }
 
-export default RaceLayoutFour;
+export default Layout2;

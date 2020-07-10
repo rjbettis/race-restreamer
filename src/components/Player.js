@@ -77,25 +77,48 @@ class Player extends Component {
   }
 
   render() {
-    return (
-      <Container className="no-padding">
-        <Row xl={2}>
-          <Col xl={2} className="swap-button-padding-left">
-            <SwapButtons
-              activeStreams={this.props.activeStreams}
-              racers={this.props.racers}
-              streamNum={this.props.streamNum}
-              changeRacer={this.props.changeRacer}
-            />
-          </Col>
+    if (this.props.layout === 2) {
+      return (
+        <Container className="no-padding">
+          <Row xl={2}>
+            <Col xl={10}>
+              <label className="playerLabel">{this.props.streamName}</label>
+              <Container id={this.props.streamName} />
+            </Col>
+          </Row>
+          <Row xl={2}>
+            <Col xl={10}>
+              <SwapButtons
+                activeStreams={this.props.activeStreams}
+                racers={this.props.racers}
+                streamNum={this.props.streamNum}
+                changeRacer={this.props.changeRacer}
+              />
+            </Col>
+          </Row>
+        </Container>
+      );
+    } else {
+      return (
+        <Container className="no-padding">
+          <Row xl={2}>
+            <Col xl={2} className="swap-button-padding-left">
+              <SwapButtons
+                activeStreams={this.props.activeStreams}
+                racers={this.props.racers}
+                streamNum={this.props.streamNum}
+                changeRacer={this.props.changeRacer}
+              />
+            </Col>
 
-          <Col xl={10}>
-            <label className="playerLabel">{this.props.streamName}</label>
-            <Container id={this.props.streamName} />
-          </Col>
-        </Row>
-      </Container>
-    );
+            <Col xl={10}>
+              <label className="playerLabel">{this.props.streamName}</label>
+              <Container id={this.props.streamName} />
+            </Col>
+          </Row>
+        </Container>
+      );
+    }
   }
 }
 

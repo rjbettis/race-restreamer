@@ -3,18 +3,28 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Player from './Player';
 import update from 'immutability-helper';
 
-class RaceLayoutFour extends Component {
+class Layout4 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      racers: this.props.location.state.channelList,
-      streamOne: this.props.location.state.channelList[0],
-      streamTwo: this.props.location.state.channelList[1],
-      streamThree: this.props.location.state.channelList[2],
-      activeStreams: [0, 1, 2],
+      racers: this.parseQueryString(),
+      streamOne: this.parseQueryString()[0],
+      streamTwo: this.parseQueryString()[1],
+      streamThree: this.parseQueryString()[2],
+      streamFour: this.parseQueryString()[3],
+      activeStreams: [0, 1, 2, 3],
+      height: window.innerHeight,
+      width: window.innerWidth,
     };
 
     this.changeRacer = this.changeRacer.bind(this);
+  }
+
+  parseQueryString() {
+    let query = this.props.location.search;
+    query = query.replace('?streams=', '');
+    query = query.split(',');
+    return query;
   }
 
   changeRacer(racer, streamNum, racerIndex) {
@@ -54,15 +64,32 @@ class RaceLayoutFour extends Component {
           2: { $set: racerIndex },
         }),
       });
+    } else if (
+      streamNum === '4' &&
+      racer !== this.state.streamOne &&
+      racer !== this.state.streamTwo &&
+      racer !== this.state.streamThree
+    ) {
+      this.setState({
+        streamFour: racer,
+        activeStreams: update(this.state.activeStreams, {
+          3: { $set: racerIndex },
+        }),
+      });
     }
   }
 
   render() {
+    var width = window.innerWidth;
+    console.log(width);
+    var height = window.innerHeight;
+    console.log(height);
+
     return (
-      <Container fluid={true} className="zeroPadding">
-        <Row xl={2}>
-          <Col xl={6}>
-            <Container fluid={true} className="zeroPadding playerMargin">
+      <Container fluid={true}>
+        <Row>
+          <Col>
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamOne}
                 streamNum="1"
@@ -70,11 +97,13 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
               />
             </Container>
           </Col>
-          <Col xl={6}>
-            <Container fluid={true} className="zeroPadding playerMargin">
+          <Col>
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamTwo}
                 streamNum="2"
@@ -82,13 +111,15 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
               />
             </Container>
           </Col>
         </Row>
-        <Row xl={2} className="justify-content-md-center">
+        <Row>
           <Col>
-            <Container fluid={true} className="zeroPadding playerMargin">
+            <Container className="zeroPaddingMarigin">
               <Player
                 key={this.state.streamThree}
                 streamNum="3"
@@ -96,13 +127,29 @@ class RaceLayoutFour extends Component {
                 racers={this.state.racers}
                 changeRacer={this.changeRacer}
                 activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
               />
             </Container>
           </Col>
-        </Row>
+          <Col>
+            <Container className="zeroPaddingMarigin">
+              <Player
+                key={this.state.streamFour}
+                streamNum="4"
+                streamName={this.state.streamFour}
+                racers={this.state.racers}
+                changeRacer={this.changeRacer}
+                activeStreams={this.state.activeStreams}
+                windowWidth={this.state.width}
+                windowHeight={this.state.height}
+              />
+            </Container>
+          </Col>
+        </Row>{' '}
       </Container>
     );
   }
 }
 
-export default RaceLayoutFour;
+export default Layout4;

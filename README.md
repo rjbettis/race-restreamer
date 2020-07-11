@@ -66,6 +66,8 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Update API call function to handle array of channels
 - [x] Basic Styling
 - [x] Use react router to initialize channel list from query string
+- [x] Make list in order of input
+- [ ] Add option to alphabetize or use input order
 - [ ] Add profile images and design a better looking lists
 - [ ] Check for duplicate channel and prevent insert
 

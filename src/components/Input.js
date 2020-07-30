@@ -10,7 +10,18 @@ class Input extends Component {
       searchValue: '',
       validChannels: [],
       invalidChannels: [],
+      demoChannels: [],
+      channelNames: [],
     };
+  }
+
+  async componentDidMount() {
+    const response = await fetch(
+      `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/demo-channels?category=retro`
+    );
+
+    const res = await response.json();
+    this.setState({ demoChannels: res });
   }
 
   handleOnChange = (event) => {
@@ -63,6 +74,17 @@ class Input extends Component {
     this.setState({ searchValue: '' });
   }
 
+  demo(demoChannels) {
+    let test = demoChannels.streams;
+    let channelNames = [...this.state.channelNames];
+
+    test.forEach((channel) => {
+      channelNames.push(channel.channel.display_name);
+    });
+
+    this.setState({ validChannels: channelNames });
+  }
+
   render() {
     return (
       <Container fluid={true} className="zeroPaddingMarigin">
@@ -80,6 +102,16 @@ class Input extends Component {
         </Navbar>
 
         <Container>
+          <Row>Try out a quick demo of pre-filled channels</Row>
+          <Row>
+            <Button
+              type="submit"
+              variant="secondary"
+              onClick={() => this.demo(this.state.demoChannels)}
+            >
+              Build Demo Layout
+            </Button>
+          </Row>
           <label className="formLabel">
             Enter channel names individually or as a comma separated list.
           </label>

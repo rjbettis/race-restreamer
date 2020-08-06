@@ -67,6 +67,8 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Basic Styling
 - [x] Use react router to initialize channel list from query string
 - [x] Make list in order of input
+- [x] Added 4 channel layout without buttons
+- [ ] Fix whitespace on bottom of 4 channel layout
 - [ ] Add option to alphabetize or use input order
 - [ ] Add profile images and design a better looking lists
 - [ ] Check for duplicate channel and prevent insert

@@ -15,6 +15,14 @@ class Layout4NoButtons extends Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.updateDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
+  }
+
   parseQueryString() {
     let query = this.props.location.search;
     query = query.replace('?streams=', '');
@@ -22,81 +30,46 @@ class Layout4NoButtons extends Component {
     return query;
   }
 
+  updateDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    setTimeout(function () {
+      window.location.reload();
+    });
+  };
+
   render() {
     return (
-      <Container fluid={true} className="no-padding no-margin yellow">
-        <Row
-          className="no-margin yellow"
-          style={{
-            height: this.state.height / 2,
-          }}
-        >
-          <Col
-            className="no-padding no-margin yellow"
-            style={{
-              height: this.state.height / 2,
-            }}
-          >
-            <Container fluid={true} className="no-padding no-margin yellow">
-              <PlayerNoButtons
-                className="no-padding no-margin yellow"
-                streamName={this.state.streamOne}
-                windowWidth={this.state.width}
-                windowHeight={this.state.height}
-              />
-            </Container>
+      <Container fluid={true} className="no-padding">
+        <Row className="no-margin">
+          <Col className="no-padding">
+            <PlayerNoButtons
+              streamName={this.state.streamOne}
+              windowWidth={this.state.width}
+              windowHeight={this.state.height}
+            />
           </Col>
-          <Col
-            className="no-padding no-margin yellow"
-            style={{
-              height: this.state.height / 2,
-            }}
-          >
-            <Container fluid={true} className="no-padding no-margin yellow">
-              <PlayerNoButtons
-                className="no-padding no-margin yellow"
-                streamName={this.state.streamTwo}
-                activeStreams={this.state.activeStreams}
-                windowHeight={this.state.height}
-              />
-            </Container>
+          <Col className="no-padding">
+            <PlayerNoButtons
+              streamName={this.state.streamTwo}
+              activeStreams={this.state.activeStreams}
+              windowHeight={this.state.height}
+            />
           </Col>
         </Row>
-        <Row
-          className="no-margin yellow"
-          style={{
-            height: this.state.height / 2,
-          }}
-        >
-          <Col
-            className="no-padding no-margin yellow"
-            style={{
-              height: this.state.height / 2,
-            }}
-          >
-            <Container fluid={true} className="no-padding no-margin yellow">
-              <PlayerNoButtons
-                className="no-padding no-margin"
-                streamName={this.state.streamThree}
-                activeStreams={this.state.activeStreams}
-                windowHeight={this.state.height}
-              />
-            </Container>
+        <Row className="no-margin">
+          <Col className="no-padding">
+            <PlayerNoButtons
+              streamName={this.state.streamThree}
+              activeStreams={this.state.activeStreams}
+              windowHeight={this.state.height}
+            />
           </Col>
-          <Col
-            className="no-padding no-margin yellow"
-            style={{
-              height: this.state.height / 2,
-            }}
-          >
-            <Container fluid={true} className="no-padding no-margin yellow">
-              <PlayerNoButtons
-                className="no-padding no-margin yellow"
-                streamName={this.state.streamFour}
-                activeStreams={this.state.activeStreams}
-                windowHeight={this.state.height}
-              />
-            </Container>
+          <Col className="no-padding">
+            <PlayerNoButtons
+              streamName={this.state.streamFour}
+              activeStreams={this.state.activeStreams}
+              windowHeight={this.state.height}
+            />
           </Col>
         </Row>
       </Container>

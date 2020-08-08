@@ -12,7 +12,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <Container fluid={true} className="no-padding no-margin yellow">
+      <Container fluid={true} className="no-padding">
         <Router>
           <Route exact path="/" component={Input} />
           <Route exact path="/Layout2" component={Layout2} />

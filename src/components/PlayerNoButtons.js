@@ -12,7 +12,7 @@ class PlayerNoButtons extends Component {
 
   componentDidMount() {
     var options;
-    let height = this.props.windowHeight / 2;
+    let height = Math.round(this.props.windowHeight / 2);
     let width = height * (16 / 9);
 
     options = {
@@ -23,14 +23,15 @@ class PlayerNoButtons extends Component {
     };
 
     this.player = new window.Twitch.Player(this.props.streamName, options);
+
+    console.log(height);
   }
 
   render() {
     return (
       <Container
         fluid={true}
-        style={{ height: this.props.windowHeight / 2 }}
-        className="no-padding no-margin blue"
+        className="no-padding"
         id={this.props.streamName}
       />
     );

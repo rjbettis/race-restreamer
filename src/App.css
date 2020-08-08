@@ -17,6 +17,11 @@
   padding-bottom: 0px !important;
 }
 
+body {
+  font-size: 0;
+  overflow: hidden;
+}
+
 .no-margin {
   margin-right: 0px !important;
   margin-left: 0px !important;

@@ -50,6 +50,7 @@ React web application with a bootstrap frontend and AWS backend.
 
 - [x] Make simple layouts that do not require an account
 - [x] Demo
+- [ ]
 - [ ] User accounts (login through twitch API)
 - [ ] Make component to build and customize a layout
 - [ ] Make advanced layout component
@@ -67,8 +68,7 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Basic Styling
 - [x] Use react router to initialize channel list from query string
 - [x] Make list in order of input
-- [x] Added 4 channel layout without buttons
-- [ ] Fix whitespace on bottom of 4 channel layout
+- [ ] Add option for no buttons for 2 and 3 layouts
 - [ ] Add option to alphabetize or use input order
 - [ ] Add profile images and design a better looking lists
 - [ ] Check for duplicate channel and prevent insert
@@ -85,6 +85,11 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Design clean, minimal styling for easy OBS captures
 - [x] Create 1 or 2 columns of buttons based on channel array length
 - [x] Fix 2 and 3 race layout
+- [x] Added 4 channel layout without buttons
+- [x] Fix whitespace on bottom of 4 channel layout
+- [x] Fix firefox width issue
+- [ ] Create 'no button' layout for 2 and 3 channel layouts
+- [ ] Fix bug when user clicks back on browser, builds new list, and gree/red channel names do not show
 - [ ] Swap current channel positions on button click
 - [ ] Improve math formula to determine player size based on window height
 - [ ] Sass conditionals for dynamic button size rendering for different resolutions/scales

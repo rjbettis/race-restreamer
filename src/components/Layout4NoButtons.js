@@ -17,6 +17,7 @@ class Layout4NoButtons extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
+    document.body.className = 'body-no-button-layout';
   }
 
   componentWillUnmount() {
@@ -32,6 +33,7 @@ class Layout4NoButtons extends Component {
 
   updateDimensions = () => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
+
     setTimeout(function () {
       window.location.reload();
     });

@@ -46,20 +46,12 @@ class Player extends Component {
         };
       }
     } else if (this.props.racers.length > 3) {
-      if (this.props.streamNum === '1') {
-        options = {
-          width: width,
-          height: height,
-          channel: this.props.streamName,
-        };
-      } else {
-        options = {
-          width: width,
-          height: height,
-          channel: this.props.streamName,
-          muted: true,
-        };
-      }
+      options = {
+        width: width,
+        height: height,
+        channel: this.props.streamName,
+        muted: true,
+      };
     }
 
     this.player = new window.Twitch.Player(this.props.streamName, options);

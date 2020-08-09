@@ -17,7 +17,7 @@
   padding-bottom: 0px !important;
 }
 
-body {
+.body-no-button-layout {
   font-size: 0;
   overflow: hidden;
 }
@@ -142,8 +142,19 @@ body {
   margin-bottom: 20px;
 }
 
+.demoBtn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.radio-padding {
+  padding-top: 20px;
+}
+
 .buildStreamBtn {
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .zeroPaddingMarigin {

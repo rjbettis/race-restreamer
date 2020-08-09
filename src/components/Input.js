@@ -102,14 +102,14 @@ class Input extends Component {
         </Navbar>
 
         <Container>
-          <Row>Try out a quick demo of pre-filled channels</Row>
           <Row>
             <Button
+              className="buildStreamBtn"
               type="submit"
               variant="secondary"
               onClick={() => this.demo(this.state.demoChannels)}
             >
-              Build Demo Layout
+              Populate Demo Layout
             </Button>
           </Row>
           <label className="formLabel">
@@ -159,22 +159,57 @@ class Input extends Component {
               ))}
             </Col>
           </Row>
-          {this.state.validChannels.length > 3 ? (
-            <Link
-              to={{
-                pathname: `/Layout4`,
-                search: `?streams=${this.state.validChannels}`,
-              }}
-            >
-              <Button
-                variant="secondary"
-                size="lg"
-                block
-                className="buildStreamBtn"
-              >
-                Build Restream Layout
-              </Button>
-            </Link>
+
+          {this.state.validChannels.length > 4 ? (
+            <Container fluid={true}>
+              <Row>
+                <Col>
+                  <Link
+                    to={{
+                      pathname: `/Layout4`,
+                      search: `?streams=${this.state.validChannels}`,
+                    }}
+                  >
+                    <Button variant="secondary" className="buildStreamBtn">
+                      Build Restream Layout
+                    </Button>
+                  </Link>
+                </Col>
+              </Row>
+            </Container>
+          ) : null}
+
+          {this.state.validChannels.length === 4 ? (
+            <React.Fragment>
+              <Row>
+                <Col>
+                  <Link
+                    to={{
+                      pathname: `/Layout4`,
+                      search: `?streams=${this.state.validChannels}`,
+                    }}
+                  >
+                    <Button variant="secondary" className="buildStreamBtn">
+                      Build Restream Layout With Buttons
+                    </Button>
+                  </Link>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Link
+                    to={{
+                      pathname: `/Layout4NoButtons`,
+                      search: `?streams=${this.state.validChannels}`,
+                    }}
+                  >
+                    <Button variant="secondary" className="buildStreamBtn">
+                      Build Restream Layout Without Buttons
+                    </Button>
+                  </Link>
+                </Col>
+              </Row>
+            </React.Fragment>
           ) : null}
           {this.state.validChannels.length === 3 ? (
             <Link
@@ -183,12 +218,7 @@ class Input extends Component {
                 search: `?streams=${this.state.validChannels}`,
               }}
             >
-              <Button
-                variant="secondary"
-                size="lg"
-                block
-                className="buildStreamBtn"
-              >
+              <Button variant="secondary" className="buildStreamBtn">
                 Build Restream Layout
               </Button>
             </Link>
@@ -200,12 +230,7 @@ class Input extends Component {
                 search: `?streams=${this.state.validChannels}`,
               }}
             >
-              <Button
-                variant="secondary"
-                size="lg"
-                block
-                className="buildStreamBtn"
-              >
+              <Button variant="secondary" className="buildStreamBtn">
                 Build Restream Layout
               </Button>
             </Link>

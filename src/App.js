@@ -19,10 +19,10 @@ class App extends Component {
           <Route exact path="/" component={Input} />
           <Route exact path="/Layout2" component={Layout2} />
           <Route exact path="/Layout3" component={Layout3} />
-          <Route path="/Layout4" component={Layout4} />
-          <Route path="/Layout4NoButtons" component={Layout4NoButtons} />
-          <Route path="/Layout3NoButtons" component={Layout3NoButtons} />
-          <Route path="/Layout2NoButtons" component={Layout2NoButtons} />
+          <Route exact path="/Layout4" component={Layout4} />
+          <Route exact path="/Layout4NoButtons" component={Layout4NoButtons} />
+          <Route exact path="/Layout3NoButtons" component={Layout3NoButtons} />
+          <Route exact path="/Layout2NoButtons" component={Layout2NoButtons} />
         </Router>
       </Container>
     );

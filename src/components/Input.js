@@ -18,6 +18,7 @@ class Input extends Component {
   }
 
   async componentDidMount() {
+    document.body.className = '';
     const response = await fetch(
       `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/demo-channels?category=retro`
     );

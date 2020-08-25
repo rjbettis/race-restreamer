@@ -68,10 +68,10 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Basic Styling
 - [x] Use react router to initialize channel list from query string
 - [x] Make list in order of input
-- [ ] Add option for no buttons for 2 and 3 layouts
+- [x] Add option for no buttons for 2 and 3 layouts
+- [x] Check for duplicate channel and prevent insert
 - [ ] Add option to alphabetize or use input order
 - [ ] Add profile images and design a better looking lists
-- [ ] Check for duplicate channel and prevent insert
 
 ### Race Layouts
 

@@ -10,6 +10,8 @@ class Input extends Component {
       searchValue: '',
       validChannels: [],
       invalidChannels: [],
+      existingChannel: '',
+      existingChannels: [],
       demoChannels: [],
       channelNames: [],
     };
@@ -60,13 +62,23 @@ class Input extends Component {
 
     res.forEach((resp, index) => {
       if (resp._total > 0) {
-        let validChannels = [...this.state.validChannels];
-        validChannels.push(resp.users[0].display_name);
-        this.setState({ validChannels: validChannels });
+        var n = this.state.validChannels.includes(resp.users[0].display_name);
+
+        if (n === false) {
+          let validChannels = [...this.state.validChannels];
+          validChannels.push(resp.users[0].display_name);
+          this.setState({ validChannels: validChannels });
+        }
+        if (n === true) {
+          this.setState({
+            existingChannel:
+              resp.users[0].display_name + ' has already been added.',
+          });
+        }
       } else {
-        let invalidChannels = [...this.state.invalidChannels];
-        invalidChannels.push(separatedArray[index]);
-        this.setState({ invalidChannels: invalidChannels });
+        this.setState({
+          existingChannel: this.state.searchValue + ' does not exist.',
+        });
       }
     });
 
@@ -135,6 +147,14 @@ class Input extends Component {
               </Col>
             </Form.Row>
           </Form>
+
+          <Container key={this.state.existingChannel}>
+            <label className="red" key={this.state.existingChannel}>
+              {this.state.existingChannel}
+            </label>
+            <br />
+          </Container>
+
           <Row>
             <Col>
               <h5 className="formMargin">Valid Channels</h5>
@@ -148,133 +168,122 @@ class Input extends Component {
               ))}
             </Col>
             <Col>
-              <h5 className="formMargin">Invalid Channels</h5>
-              {this.state.invalidChannels.map((channel, index) => (
-                <Container key={index}>
-                  <label className="red" key={index}>
-                    {channel + ' '}not found. Please try again.
-                  </label>
-                  <br />
+              {this.state.validChannels.length > 4 ? (
+                <Container fluid={true}>
+                  <Row>
+                    <Col>
+                      <Link
+                        to={{
+                          pathname: `/Layout4`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Build Restream Layout
+                        </Button>
+                      </Link>
+                    </Col>
+                  </Row>
                 </Container>
-              ))}
+              ) : null}
+              {this.state.validChannels.length === 4 ? (
+                <React.Fragment>
+                  <Row>
+                    <Col>
+                      <Link
+                        to={{
+                          pathname: `/Layout4`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Build Restream Layout With Buttons
+                        </Button>
+                      </Link>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Link
+                        to={{
+                          pathname: `/Layout4NoButtons`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Build Restream Layout Without Buttons
+                        </Button>
+                      </Link>
+                    </Col>
+                  </Row>
+                </React.Fragment>
+              ) : null}
+              {this.state.validChannels.length === 3 ? (
+                <React.Fragment>
+                  <Row>
+                    <Col>
+                      <Link
+                        to={{
+                          pathname: `/Layout3`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Build Restream Layout With Buttons
+                        </Button>
+                      </Link>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Link
+                        to={{
+                          pathname: `/Layout3NoButtons`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Build Restream Layout Without Buttons
+                        </Button>
+                      </Link>
+                    </Col>
+                  </Row>
+                </React.Fragment>
+              ) : null}
+              {this.state.validChannels.length === 2 ? (
+                <React.Fragment>
+                  <Row>
+                    <Col>
+                      <Link
+                        to={{
+                          pathname: `/Layout2`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Build Restream Layout With Buttons
+                        </Button>
+                      </Link>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Link
+                        to={{
+                          pathname: `/Layout2NoButtons`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Build Restream Layout Without Buttons
+                        </Button>
+                      </Link>
+                    </Col>
+                  </Row>
+                </React.Fragment>
+              ) : null}
             </Col>
           </Row>
-
-          {this.state.validChannels.length > 4 ? (
-            <Container fluid={true}>
-              <Row>
-                <Col>
-                  <Link
-                    to={{
-                      pathname: `/Layout4`,
-                      search: `?streams=${this.state.validChannels}`,
-                    }}
-                  >
-                    <Button variant="secondary" className="buildStreamBtn">
-                      Build Restream Layout
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-            </Container>
-          ) : null}
-
-          {this.state.validChannels.length === 4 ? (
-            <React.Fragment>
-              <Row>
-                <Col>
-                  <Link
-                    to={{
-                      pathname: `/Layout4`,
-                      search: `?streams=${this.state.validChannels}`,
-                    }}
-                  >
-                    <Button variant="secondary" className="buildStreamBtn">
-                      Build Restream Layout With Buttons
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Link
-                    to={{
-                      pathname: `/Layout4NoButtons`,
-                      search: `?streams=${this.state.validChannels}`,
-                    }}
-                  >
-                    <Button variant="secondary" className="buildStreamBtn">
-                      Build Restream Layout Without Buttons
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-            </React.Fragment>
-          ) : null}
-          {this.state.validChannels.length === 3 ? (
-            <React.Fragment>
-              <Row>
-                <Col>
-                  <Link
-                    to={{
-                      pathname: `/Layout3`,
-                      search: `?streams=${this.state.validChannels}`,
-                    }}
-                  >
-                    <Button variant="secondary" className="buildStreamBtn">
-                      Build Restream Layout With Buttons
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Link
-                    to={{
-                      pathname: `/Layout3NoButtons`,
-                      search: `?streams=${this.state.validChannels}`,
-                    }}
-                  >
-                    <Button variant="secondary" className="buildStreamBtn">
-                      Build Restream Layout Without Buttons
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-            </React.Fragment>
-          ) : null}
-          {this.state.validChannels.length === 2 ? (
-            <React.Fragment>
-              <Row>
-                <Col>
-                  <Link
-                    to={{
-                      pathname: `/Layout2`,
-                      search: `?streams=${this.state.validChannels}`,
-                    }}
-                  >
-                    <Button variant="secondary" className="buildStreamBtn">
-                      Build Restream Layout With Buttons
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Link
-                    to={{
-                      pathname: `/Layout2NoButtons`,
-                      search: `?streams=${this.state.validChannels}`,
-                    }}
-                  >
-                    <Button variant="secondary" className="buildStreamBtn">
-                      Build Restream Layout Without Buttons
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-            </React.Fragment>
-          ) : null}
         </Container>
       </Container>
     );

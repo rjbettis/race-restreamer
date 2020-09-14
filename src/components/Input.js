@@ -14,6 +14,7 @@ class Input extends Component {
       existingChannels: [],
       demoChannels: [],
       channelNames: [],
+      sortCheckbox: false,
     };
   }
 
@@ -98,6 +99,23 @@ class Input extends Component {
     this.setState({ validChannels: channelNames });
   }
 
+  handleSortToggle(event) {
+    if (this.state.sortCheckbox === false) {
+      this.setState({ sortCheckbox: true });
+      this.state.validChannels.sort(function (a, b) {
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+      });
+    } else if (this.state.sortCheckbox === true) {
+      this.setState({ sortCheckbox: false });
+    }
+  }
+
+  handleBuild(event) {
+    if (this.state.sortCheckbox === true) {
+      this.state.validChannels.sort();
+    }
+  }
+
   render() {
     return (
       <Container fluid={true} className="zeroPaddingMarigin">
@@ -179,10 +197,19 @@ class Input extends Component {
                           search: `?streams=${this.state.validChannels}`,
                         }}
                       >
-                        <Button variant="secondary" className="buildStreamBtn">
+                        <Button
+                          variant="secondary"
+                          className="buildStreamBtn"
+                          onClick={(event) => this.handleBuild(event)}
+                        >
                           Build Restream Layout
                         </Button>
                       </Link>
+                      <Form.Check
+                        type="checkbox"
+                        label="Sort list in alphabetical order."
+                        onClick={(event) => this.handleSortToggle(event)}
+                      ></Form.Check>
                     </Col>
                   </Row>
                 </Container>

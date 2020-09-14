@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -15,6 +15,9 @@ class Input extends Component {
       demoChannels: [],
       channelNames: [],
       sortCheckbox: false,
+      profileImages: [],
+      demoImages: [],
+      logoName: [],
     };
   }
 
@@ -70,6 +73,10 @@ class Input extends Component {
           let validChannels = [...this.state.validChannels];
           validChannels.push(resp.users[0].display_name);
           this.setState({ validChannels: validChannels });
+
+          let profileImages = [...this.state.profileImages];
+          profileImages.push(resp.users[0].logo);
+          this.setState({ profileImages: profileImages });
         }
         if (n === true) {
           this.setState({
@@ -91,14 +98,20 @@ class Input extends Component {
   demo(demoChannels) {
     let test = demoChannels.streams;
     let channelNames = [...this.state.channelNames];
+    let demoImages = [...this.state.demoImages];
 
     test.forEach((channel) => {
       channelNames.push(channel.channel.display_name);
     });
+    test.forEach((channel) => {
+      demoImages.push(channel.channel.logo);
+    });
 
     this.setState({ validChannels: channelNames });
+    this.setState({ profileImages: demoImages });
   }
 
+  /*
   handleSortToggle(event) {
     if (this.state.sortCheckbox === false) {
       this.setState({ sortCheckbox: true });
@@ -109,12 +122,7 @@ class Input extends Component {
       this.setState({ sortCheckbox: false });
     }
   }
-
-  handleBuild(event) {
-    if (this.state.sortCheckbox === true) {
-      this.state.validChannels.sort();
-    }
-  }
+*/
 
   render() {
     return (
@@ -179,6 +187,11 @@ class Input extends Component {
               <h5 className="formMargin">Valid Channels</h5>
               {this.state.validChannels.map((channel, index) => (
                 <Container key={index}>
+                  <Image
+                    className="profileImg"
+                    src={this.state.profileImages[index]}
+                    rounded
+                  />
                   <label className="green">
                     {channel + ' '}is added to the list.
                   </label>
@@ -197,19 +210,10 @@ class Input extends Component {
                           search: `?streams=${this.state.validChannels}`,
                         }}
                       >
-                        <Button
-                          variant="secondary"
-                          className="buildStreamBtn"
-                          onClick={(event) => this.handleBuild(event)}
-                        >
+                        <Button variant="secondary" className="buildStreamBtn">
                           Build Restream Layout
                         </Button>
                       </Link>
-                      <Form.Check
-                        type="checkbox"
-                        label="Sort list in alphabetical order."
-                        onClick={(event) => this.handleSortToggle(event)}
-                      ></Form.Check>
                     </Col>
                   </Row>
                 </Container>

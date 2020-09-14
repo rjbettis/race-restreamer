@@ -74,7 +74,9 @@ class Player extends Component {
         <Container className="no-padding">
           <Row xl={2}>
             <Col xl={10}>
-              <label className="playerLabel">{this.props.streamName}</label>
+              <label style={this.props.playerLabelStyle}>
+                {this.props.streamName}
+              </label>
               <Container id={this.props.streamName} />
             </Col>
           </Row>
@@ -104,7 +106,9 @@ class Player extends Component {
             </Col>
 
             <Col xl={10}>
-              <label className="playerLabel">{this.props.streamName}</label>
+              <label style={this.props.playerLabelStyle}>
+                {this.props.streamName}
+              </label>
               <Container id={this.props.streamName} />
             </Col>
           </Row>

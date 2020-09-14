@@ -90,7 +90,9 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Fix whitespace on bottom of 4 channel layout
 - [x] Fix firefox width issue
 - [x] Create 'no button' layout for 2 and 3 channel layouts
-- [ ] Fix bug when user clicks back on browser, builds new list, and gree/red channel names do not show
+- [x] Fix bug when user clicks back on browser, builds new list, and gree/red channel names do not show
+- [x] Add ability to change text and background colors
+- [ ] Add query string to url for text and background colors
 - [ ] Swap current channel positions on button click
 - [ ] Improve math formula to determine player size based on window height
 - [ ] Sass conditionals for dynamic button size rendering for different resolutions/scales

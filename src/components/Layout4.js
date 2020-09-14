@@ -85,8 +85,18 @@ class Layout4 extends Component {
     var height = window.innerHeight;
     console.log(height);
 
+    const backgroundColor = {
+      backgroundColor: this.props.location.background,
+    };
+
+    const playerLabelStyle = {
+      color: this.props.location.fontColor,
+      fontWeight: 'bold',
+      fontSize: '22px',
+    };
+
     return (
-      <Container fluid={true}>
+      <Container fluid={true} style={backgroundColor}>
         <Row>
           <Col>
             <Container className="zeroPaddingMarigin">
@@ -99,6 +109,7 @@ class Layout4 extends Component {
                 activeStreams={this.state.activeStreams}
                 windowWidth={this.state.width}
                 windowHeight={this.state.height}
+                playerLabelStyle={playerLabelStyle}
               />
             </Container>
           </Col>
@@ -113,6 +124,7 @@ class Layout4 extends Component {
                 activeStreams={this.state.activeStreams}
                 windowWidth={this.state.width}
                 windowHeight={this.state.height}
+                playerLabelStyle={playerLabelStyle}
               />
             </Container>
           </Col>
@@ -129,6 +141,7 @@ class Layout4 extends Component {
                 activeStreams={this.state.activeStreams}
                 windowWidth={this.state.width}
                 windowHeight={this.state.height}
+                playerLabelStyle={playerLabelStyle}
               />
             </Container>
           </Col>
@@ -143,6 +156,7 @@ class Layout4 extends Component {
                 activeStreams={this.state.activeStreams}
                 windowWidth={this.state.width}
                 windowHeight={this.state.height}
+                playerLabelStyle={playerLabelStyle}
               />
             </Container>
           </Col>

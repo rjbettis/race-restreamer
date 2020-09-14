@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Form, Button, Row, Col, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
+import { SketchPicker } from 'react-color';
 
 class Input extends Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class Input extends Component {
       profileImages: [],
       demoImages: [],
       logoName: [],
+      background: '#fff',
+      fontColor: '#000',
     };
   }
 
@@ -29,6 +32,8 @@ class Input extends Component {
 
     const res = await response.json();
     this.setState({ demoChannels: res });
+    this.setState({ showColorPicker: false });
+    this.setState({ showFontColorPicker: false });
   }
 
   handleOnChange = (event) => {
@@ -124,9 +129,59 @@ class Input extends Component {
   }
 */
 
+  //BACKGROUND
+  handleBackgroundChange = (color) => {
+    this.setState({ background: color.hex });
+  };
+
+  handleBackgroundChangeComplete = (color) => {
+    this.setState({ background: color.hex });
+  };
+
+  handleBackgroundColorPickerClick() {
+    this.setState({ showColorPicker: true });
+  }
+
+  handleBackgroundColorPickerClose() {
+    this.setState({ showColorPicker: false });
+  }
+
+  // FONT
+  handleFontChange = (color) => {
+    this.setState({ fontColor: color.hex });
+  };
+
+  handleFontChangeComplete = (color) => {
+    this.setState({ fontColor: color.hex });
+  };
+
+  handleFontColorPickerClick() {
+    this.setState({ showFontColorPicker: true });
+  }
+
+  handleFontColorPickerClose() {
+    this.setState({ showFontColorPicker: false });
+  }
+
   render() {
+    const popover = {
+      position: 'absolute',
+      zIndex: '2',
+    };
+
+    const cover = {
+      position: 'fixed',
+      top: '0px',
+      right: '0px',
+      bottom: '0px',
+      left: '0px',
+    };
+
     return (
       <Container fluid={true} className="zeroPaddingMarigin">
+        {/*
+         * Navigation bar
+         */}
         <Navbar className="color-nav" variant="dark">
           <img
             className="nav-img"
@@ -140,7 +195,13 @@ class Input extends Component {
           </Navbar.Brand>
         </Navbar>
 
+        {/*
+         * Container for everything
+         */}
         <Container>
+          {/*
+           * Populate Demo Button
+           */}
           <Row>
             <Button
               className="buildStreamBtn"
@@ -151,6 +212,10 @@ class Input extends Component {
               Populate Demo Layout
             </Button>
           </Row>
+
+          {/*
+           * Channel input form
+           */}
           <label className="formLabel">
             Enter channel names individually or as a comma separated list.
           </label>
@@ -175,6 +240,9 @@ class Input extends Component {
             </Form.Row>
           </Form>
 
+          {/*
+           * Label displays failed channel input
+           */}
           <Container key={this.state.existingChannel}>
             <label className="red" key={this.state.existingChannel}>
               {this.state.existingChannel}
@@ -182,6 +250,9 @@ class Input extends Component {
             <br />
           </Container>
 
+          {/*
+           * Left hand column with labels to display succesfull channel input
+           */}
           <Row>
             <Col>
               <h5 className="formMargin">Valid Channels</h5>
@@ -199,118 +270,377 @@ class Input extends Component {
                 </Container>
               ))}
             </Col>
+
+            {/*
+             * Right hand column with buttons to build the layout
+             */}
             <Col>
+              {/*
+               * Conditionally renders when user inputs more than 4 channels
+               */}
               {this.state.validChannels.length > 4 ? (
                 <Container fluid={true}>
+                  {/*
+                   * Background color button
+                   */}
                   <Row>
-                    <Col>
-                      <Link
-                        to={{
-                          pathname: `/Layout4`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Build Restream Layout
-                        </Button>
-                      </Link>
-                    </Col>
+                    <Button
+                      variant="secondary"
+                      className="buildStreamBtn"
+                      onClick={(event) =>
+                        this.handleBackgroundColorPickerClick(event)
+                      }
+                    >
+                      Change Background Color
+                    </Button>
+                    {this.state.showColorPicker ? (
+                      <Container style={popover}>
+                        <Container
+                          style={cover}
+                          onClick={(event) =>
+                            this.handleBackgroundColorPickerClose(event)
+                          }
+                        />
+                        <SketchPicker
+                          color={this.state.background}
+                          onChange={this.handleBackgroundChange}
+                          onChangeComplete={this.handleBackgroundChangeComplete}
+                        />
+                      </Container>
+                    ) : null}
+                  </Row>
+
+                  {/*
+                   * Font color button
+                   */}
+                  <Row>
+                    <Button
+                      variant="secondary"
+                      className="buildStreamBtn"
+                      onClick={(event) =>
+                        this.handleFontColorPickerClick(event)
+                      }
+                    >
+                      Change Font Color
+                    </Button>
+                    {this.state.showFontColorPicker ? (
+                      <Container style={popover}>
+                        <Container
+                          style={cover}
+                          onClick={(event) =>
+                            this.handleFontColorPickerClose(event)
+                          }
+                        />
+                        <SketchPicker
+                          color={this.state.fontColor}
+                          onChange={this.handleFontChange}
+                          onChangeComplete={this.handleFontChangeComplete}
+                        />
+                      </Container>
+                    ) : null}
+                  </Row>
+
+                  {/*
+                   * Build restream layout button
+                   */}
+                  <Row>
+                    <Link
+                      to={{
+                        pathname: `/Layout4`,
+                        search: `?streams=${this.state.validChannels}`,
+                        background: this.state.background,
+                        fontColor: this.state.fontColor,
+                      }}
+                    >
+                      <Button variant="secondary" className="buildStreamBtn">
+                        Build Restream Layout
+                      </Button>
+                    </Link>
                   </Row>
                 </Container>
               ) : null}
+
+              {/*
+               * Conditionally renders when user inputs exactly 4 channels
+               */}
               {this.state.validChannels.length === 4 ? (
                 <React.Fragment>
+                  {/*
+                   * Background color button
+                   */}
                   <Row>
-                    <Col>
-                      <Link
-                        to={{
-                          pathname: `/Layout4`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Build Restream Layout With Buttons
-                        </Button>
-                      </Link>
-                    </Col>
+                    <Button
+                      variant="secondary"
+                      className="buildStreamBtn"
+                      onClick={(event) =>
+                        this.handleBackgroundColorPickerClick(event)
+                      }
+                    >
+                      Change Background Color
+                    </Button>
+                    {this.state.showColorPicker ? (
+                      <Container style={popover}>
+                        <Container
+                          style={cover}
+                          onClick={(event) =>
+                            this.handleBackgroundColorPickerClose(event)
+                          }
+                        />
+                        <SketchPicker
+                          color={this.state.background}
+                          onChange={this.handleBackgroundChange}
+                          onChangeComplete={this.handleBackgroundChangeComplete}
+                        />
+                      </Container>
+                    ) : null}
+                  </Row>
+
+                  {/*
+                   * Font color button
+                   */}
+                  <Row>
+                    <Button
+                      variant="secondary"
+                      className="buildStreamBtn"
+                      onClick={(event) =>
+                        this.handleFontColorPickerClick(event)
+                      }
+                    >
+                      Change Font Color
+                    </Button>
+                    {this.state.showFontColorPicker ? (
+                      <Container style={popover}>
+                        <Container
+                          style={cover}
+                          onClick={(event) =>
+                            this.handleFontColorPickerClose(event)
+                          }
+                        />
+                        <SketchPicker
+                          color={this.state.fontColor}
+                          onChange={this.handleFontChange}
+                          onChangeComplete={this.handleFontChangeComplete}
+                        />
+                      </Container>
+                    ) : null}
+                  </Row>
+
+                  {/*
+                   * Build restream layout buttons
+                   */}
+                  <Row>
+                    <Link
+                      to={{
+                        pathname: `/Layout4`,
+                        search: `?streams=${this.state.validChannels}`,
+                      }}
+                    >
+                      <Button variant="secondary" className="buildStreamBtn">
+                        Build Restream Layout With Buttons
+                      </Button>
+                    </Link>
                   </Row>
                   <Row>
-                    <Col>
-                      <Link
-                        to={{
-                          pathname: `/Layout4NoButtons`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Build Restream Layout Without Buttons
-                        </Button>
-                      </Link>
-                    </Col>
+                    <Link
+                      to={{
+                        pathname: `/Layout4NoButtons`,
+                        search: `?streams=${this.state.validChannels}`,
+                      }}
+                    >
+                      <Button variant="secondary" className="buildStreamBtn">
+                        Build Restream Layout Without Buttons
+                      </Button>
+                    </Link>
                   </Row>
                 </React.Fragment>
               ) : null}
+
+              {/*
+               * Conditionally renders when user inputs exactly 3 channels
+               */}
               {this.state.validChannels.length === 3 ? (
                 <React.Fragment>
+                  {/*
+                   * Background color button
+                   */}
                   <Row>
-                    <Col>
-                      <Link
-                        to={{
-                          pathname: `/Layout3`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Build Restream Layout With Buttons
-                        </Button>
-                      </Link>
-                    </Col>
+                    <Button
+                      variant="secondary"
+                      className="buildStreamBtn"
+                      onClick={(event) =>
+                        this.handleBackgroundColorPickerClick(event)
+                      }
+                    >
+                      Change Background Color
+                    </Button>
+                    {this.state.showColorPicker ? (
+                      <Container style={popover}>
+                        <Container
+                          style={cover}
+                          onClick={(event) =>
+                            this.handleBackgroundColorPickerClose(event)
+                          }
+                        />
+                        <SketchPicker
+                          color={this.state.background}
+                          onChange={this.handleBackgroundChange}
+                          onChangeComplete={this.handleBackgroundChangeComplete}
+                        />
+                      </Container>
+                    ) : null}
+                  </Row>
+
+                  {/*
+                   * Font color button
+                   */}
+                  <Row>
+                    <Button
+                      variant="secondary"
+                      className="buildStreamBtn"
+                      onClick={(event) =>
+                        this.handleFontColorPickerClick(event)
+                      }
+                    >
+                      Change Font Color
+                    </Button>
+                    {this.state.showFontColorPicker ? (
+                      <Container style={popover}>
+                        <Container
+                          style={cover}
+                          onClick={(event) =>
+                            this.handleFontColorPickerClose(event)
+                          }
+                        />
+                        <SketchPicker
+                          color={this.state.fontColor}
+                          onChange={this.handleFontChange}
+                          onChangeComplete={this.handleFontChangeComplete}
+                        />
+                      </Container>
+                    ) : null}
+                  </Row>
+
+                  {/*
+                   * Build restream layout buttons
+                   */}
+                  <Row>
+                    <Link
+                      to={{
+                        pathname: `/Layout3`,
+                        search: `?streams=${this.state.validChannels}`,
+                      }}
+                    >
+                      <Button variant="secondary" className="buildStreamBtn">
+                        Build Restream Layout With Buttons
+                      </Button>
+                    </Link>
                   </Row>
                   <Row>
-                    <Col>
-                      <Link
-                        to={{
-                          pathname: `/Layout3NoButtons`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Build Restream Layout Without Buttons
-                        </Button>
-                      </Link>
-                    </Col>
+                    <Link
+                      to={{
+                        pathname: `/Layout3NoButtons`,
+                        search: `?streams=${this.state.validChannels}`,
+                      }}
+                    >
+                      <Button variant="secondary" className="buildStreamBtn">
+                        Build Restream Layout Without Buttons
+                      </Button>
+                    </Link>
                   </Row>
                 </React.Fragment>
               ) : null}
+
+              {/*
+               * Conditionally renders when user inputs exactly 2 channels
+               */}
               {this.state.validChannels.length === 2 ? (
                 <React.Fragment>
+                  {/*
+                   * Background color button
+                   */}
                   <Row>
-                    <Col>
-                      <Link
-                        to={{
-                          pathname: `/Layout2`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Build Restream Layout With Buttons
-                        </Button>
-                      </Link>
-                    </Col>
+                    <Button
+                      variant="secondary"
+                      className="buildStreamBtn"
+                      onClick={(event) =>
+                        this.handleBackgroundColorPickerClick(event)
+                      }
+                    >
+                      Change Background Color
+                    </Button>
+                    {this.state.showColorPicker ? (
+                      <Container style={popover}>
+                        <Container
+                          style={cover}
+                          onClick={(event) =>
+                            this.handleBackgroundColorPickerClose(event)
+                          }
+                        />
+                        <SketchPicker
+                          color={this.state.background}
+                          onChange={this.handleBackgroundChange}
+                          onChangeComplete={this.handleBackgroundChangeComplete}
+                        />
+                      </Container>
+                    ) : null}
+                  </Row>
+
+                  {/*
+                   * Font color button
+                   */}
+                  <Row>
+                    <Button
+                      variant="secondary"
+                      className="buildStreamBtn"
+                      onClick={(event) =>
+                        this.handleFontColorPickerClick(event)
+                      }
+                    >
+                      Change Font Color
+                    </Button>
+                    {this.state.showFontColorPicker ? (
+                      <Container style={popover}>
+                        <Container
+                          style={cover}
+                          onClick={(event) =>
+                            this.handleFontColorPickerClose(event)
+                          }
+                        />
+                        <SketchPicker
+                          color={this.state.fontColor}
+                          onChange={this.handleFontChange}
+                          onChangeComplete={this.handleFontChangeComplete}
+                        />
+                      </Container>
+                    ) : null}
+                  </Row>
+
+                  {/*
+                   * Build restream layout buttons
+                   */}
+                  <Row>
+                    <Link
+                      to={{
+                        pathname: `/Layout2`,
+                        search: `?streams=${this.state.validChannels}`,
+                      }}
+                    >
+                      <Button variant="secondary" className="buildStreamBtn">
+                        Build Restream Layout With Buttons
+                      </Button>
+                    </Link>
                   </Row>
                   <Row>
-                    <Col>
-                      <Link
-                        to={{
-                          pathname: `/Layout2NoButtons`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Build Restream Layout Without Buttons
-                        </Button>
-                      </Link>
-                    </Col>
+                    <Link
+                      to={{
+                        pathname: `/Layout2NoButtons`,
+                        search: `?streams=${this.state.validChannels}`,
+                      }}
+                    >
+                      <Button variant="secondary" className="buildStreamBtn">
+                        Build Restream Layout Without Buttons
+                      </Button>
+                    </Link>
                   </Row>
                 </React.Fragment>
               ) : null}

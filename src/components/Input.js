@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Form, Button, Row, Col, Image } from 'react-bootstrap';
+import {
+  Container,
+  Form,
+  Button,
+  Row,
+  Col,
+  Image,
+  Modal,
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { SketchPicker } from 'react-color';
@@ -21,6 +29,7 @@ class Input extends Component {
       logoName: [],
       background: '#fff',
       fontColor: '#000',
+      showModal: false,
     };
   }
 
@@ -117,6 +126,9 @@ class Input extends Component {
   }
 
   /*
+
+  alphabetical sort for validChannels. does not sort logo array
+
   handleSortToggle(event) {
     if (this.state.sortCheckbox === false) {
       this.setState({ sortCheckbox: true });
@@ -163,6 +175,19 @@ class Input extends Component {
     this.setState({ showFontColorPicker: false });
   }
 
+  //modal control
+  handleModalShow(event) {
+    this.setState({
+      showModal: true,
+    });
+  }
+
+  handleModalClose(event) {
+    this.setState({
+      showModal: false,
+    });
+  }
+
   render() {
     const popover = {
       position: 'absolute',
@@ -193,25 +218,33 @@ class Input extends Component {
           <Navbar.Brand className="large-nav" href="/">
             Build New List
           </Navbar.Brand>
+          {/*
+           * Populate Demo Button
+           */}
+          <Button
+            type="submit"
+            variant="secondary"
+            onClick={() => this.demo(this.state.demoChannels)}
+          >
+            Populate Demo Layout
+          </Button>
+          {/*
+           * Modal for colors
+           */}
+          <Button
+            type="submit"
+            variant="secondary"
+            onClick={(event) => this.handleModalShow(event)}
+          >
+            Customize Layout Colors
+          </Button>
         </Navbar>
 
         {/*
          * Container for everything
          */}
         <Container>
-          {/*
-           * Populate Demo Button
-           */}
-          <Row>
-            <Button
-              className="buildStreamBtn"
-              type="submit"
-              variant="secondary"
-              onClick={() => this.demo(this.state.demoChannels)}
-            >
-              Populate Demo Layout
-            </Button>
-          </Row>
+          <Row></Row>
 
           {/*
            * Channel input form
@@ -280,66 +313,6 @@ class Input extends Component {
                */}
               {this.state.validChannels.length > 4 ? (
                 <Container fluid={true}>
-                  {/*
-                   * Background color button
-                   */}
-                  <Row>
-                    <Button
-                      variant="secondary"
-                      className="buildStreamBtn"
-                      onClick={(event) =>
-                        this.handleBackgroundColorPickerClick(event)
-                      }
-                    >
-                      Change Background Color
-                    </Button>
-                    {this.state.showColorPicker ? (
-                      <Container style={popover}>
-                        <Container
-                          style={cover}
-                          onClick={(event) =>
-                            this.handleBackgroundColorPickerClose(event)
-                          }
-                        />
-                        <SketchPicker
-                          color={this.state.background}
-                          onChange={this.handleBackgroundChange}
-                          onChangeComplete={this.handleBackgroundChangeComplete}
-                        />
-                      </Container>
-                    ) : null}
-                  </Row>
-
-                  {/*
-                   * Font color button
-                   */}
-                  <Row>
-                    <Button
-                      variant="secondary"
-                      className="buildStreamBtn"
-                      onClick={(event) =>
-                        this.handleFontColorPickerClick(event)
-                      }
-                    >
-                      Change Font Color
-                    </Button>
-                    {this.state.showFontColorPicker ? (
-                      <Container style={popover}>
-                        <Container
-                          style={cover}
-                          onClick={(event) =>
-                            this.handleFontColorPickerClose(event)
-                          }
-                        />
-                        <SketchPicker
-                          color={this.state.fontColor}
-                          onChange={this.handleFontChange}
-                          onChangeComplete={this.handleFontChangeComplete}
-                        />
-                      </Container>
-                    ) : null}
-                  </Row>
-
                   {/*
                    * Build restream layout button
                    */}
@@ -647,6 +620,78 @@ class Input extends Component {
             </Col>
           </Row>
         </Container>
+        <Modal
+          show={this.state.showModal}
+          onHide={(event) => this.handleClose(event)}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Customize Background and Font Colors</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/*
+             * Background color button
+             */}
+
+            <Button
+              variant="secondary"
+              className="buildStreamBtn"
+              onClick={(event) => this.handleBackgroundColorPickerClick(event)}
+            >
+              Change Background Color
+            </Button>
+            {this.state.showColorPicker ? (
+              <Container style={popover}>
+                <Container
+                  style={cover}
+                  onClick={(event) =>
+                    this.handleBackgroundColorPickerClose(event)
+                  }
+                />
+                <SketchPicker
+                  color={this.state.background}
+                  onChange={this.handleBackgroundChange}
+                  onChangeComplete={this.handleBackgroundChangeComplete}
+                />
+              </Container>
+            ) : null}
+
+            {/*
+             * Font color button
+             */}
+
+            <Button
+              variant="secondary"
+              className="buildStreamBtn"
+              onClick={(event) => this.handleFontColorPickerClick(event)}
+            >
+              Change Font Color
+            </Button>
+            {this.state.showFontColorPicker ? (
+              <Container style={popover}>
+                <Container
+                  style={cover}
+                  onClick={(event) => this.handleFontColorPickerClose(event)}
+                />
+                <SketchPicker
+                  color={this.state.fontColor}
+                  onChange={this.handleFontChange}
+                  onChangeComplete={this.handleFontChangeComplete}
+                />
+              </Container>
+            ) : null}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={(event) => this.handleModalClose(event)}
+            >
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Container>
     );
   }

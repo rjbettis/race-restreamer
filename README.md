@@ -50,7 +50,6 @@ React web application with a bootstrap frontend and AWS backend.
 
 - [x] Make simple layouts that do not require an account
 - [x] Demo
-- [ ]
 - [ ] User accounts (login through twitch API)
 - [ ] Make component to build and customize a layout
 - [ ] Make advanced layout component
@@ -72,7 +71,8 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Check for duplicate channel and prevent insert
 - [x] Fig bug where labels dont show up when clicking back on the browser from a no-button layout
 - [x] Add option to alphabetize or use input order
-- [ ] Add profile images and design a better looking lists
+- [x] Add profile images
+- [x] Add color configuration in a modal that is accesible in the navigation bar
 
 ### Race Layouts
 

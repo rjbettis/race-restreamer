@@ -20,6 +20,10 @@ class Layout4 extends Component {
     this.changeRacer = this.changeRacer.bind(this);
   }
 
+  componentDidMount() {
+    document.body.style.backgroundColor = this.props.location.background;
+  }
+
   parseQueryString() {
     let query = this.props.location.search;
     query = query.replace('?streams=', '');

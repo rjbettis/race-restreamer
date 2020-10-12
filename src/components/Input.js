@@ -43,6 +43,8 @@ class Input extends Component {
     this.setState({ demoChannels: res });
     this.setState({ showColorPicker: false });
     this.setState({ showFontColorPicker: false });
+
+    document.body.style.backgroundColor = '#f7f7f9';
   }
 
   handleOnChange = (event) => {
@@ -339,66 +341,6 @@ class Input extends Component {
               {this.state.validChannels.length === 4 ? (
                 <React.Fragment>
                   {/*
-                   * Background color button
-                   */}
-                  <Row>
-                    <Button
-                      variant="secondary"
-                      className="buildStreamBtn"
-                      onClick={(event) =>
-                        this.handleBackgroundColorPickerClick(event)
-                      }
-                    >
-                      Change Background Color
-                    </Button>
-                    {this.state.showColorPicker ? (
-                      <Container style={popover}>
-                        <Container
-                          style={cover}
-                          onClick={(event) =>
-                            this.handleBackgroundColorPickerClose(event)
-                          }
-                        />
-                        <SketchPicker
-                          color={this.state.background}
-                          onChange={this.handleBackgroundChange}
-                          onChangeComplete={this.handleBackgroundChangeComplete}
-                        />
-                      </Container>
-                    ) : null}
-                  </Row>
-
-                  {/*
-                   * Font color button
-                   */}
-                  <Row>
-                    <Button
-                      variant="secondary"
-                      className="buildStreamBtn"
-                      onClick={(event) =>
-                        this.handleFontColorPickerClick(event)
-                      }
-                    >
-                      Change Font Color
-                    </Button>
-                    {this.state.showFontColorPicker ? (
-                      <Container style={popover}>
-                        <Container
-                          style={cover}
-                          onClick={(event) =>
-                            this.handleFontColorPickerClose(event)
-                          }
-                        />
-                        <SketchPicker
-                          color={this.state.fontColor}
-                          onChange={this.handleFontChange}
-                          onChangeComplete={this.handleFontChangeComplete}
-                        />
-                      </Container>
-                    ) : null}
-                  </Row>
-
-                  {/*
                    * Build restream layout buttons
                    */}
                   <Row>
@@ -434,66 +376,6 @@ class Input extends Component {
               {this.state.validChannels.length === 3 ? (
                 <React.Fragment>
                   {/*
-                   * Background color button
-                   */}
-                  <Row>
-                    <Button
-                      variant="secondary"
-                      className="buildStreamBtn"
-                      onClick={(event) =>
-                        this.handleBackgroundColorPickerClick(event)
-                      }
-                    >
-                      Change Background Color
-                    </Button>
-                    {this.state.showColorPicker ? (
-                      <Container style={popover}>
-                        <Container
-                          style={cover}
-                          onClick={(event) =>
-                            this.handleBackgroundColorPickerClose(event)
-                          }
-                        />
-                        <SketchPicker
-                          color={this.state.background}
-                          onChange={this.handleBackgroundChange}
-                          onChangeComplete={this.handleBackgroundChangeComplete}
-                        />
-                      </Container>
-                    ) : null}
-                  </Row>
-
-                  {/*
-                   * Font color button
-                   */}
-                  <Row>
-                    <Button
-                      variant="secondary"
-                      className="buildStreamBtn"
-                      onClick={(event) =>
-                        this.handleFontColorPickerClick(event)
-                      }
-                    >
-                      Change Font Color
-                    </Button>
-                    {this.state.showFontColorPicker ? (
-                      <Container style={popover}>
-                        <Container
-                          style={cover}
-                          onClick={(event) =>
-                            this.handleFontColorPickerClose(event)
-                          }
-                        />
-                        <SketchPicker
-                          color={this.state.fontColor}
-                          onChange={this.handleFontChange}
-                          onChangeComplete={this.handleFontChangeComplete}
-                        />
-                      </Container>
-                    ) : null}
-                  </Row>
-
-                  {/*
                    * Build restream layout buttons
                    */}
                   <Row>
@@ -528,66 +410,6 @@ class Input extends Component {
                */}
               {this.state.validChannels.length === 2 ? (
                 <React.Fragment>
-                  {/*
-                   * Background color button
-                   */}
-                  <Row>
-                    <Button
-                      variant="secondary"
-                      className="buildStreamBtn"
-                      onClick={(event) =>
-                        this.handleBackgroundColorPickerClick(event)
-                      }
-                    >
-                      Change Background Color
-                    </Button>
-                    {this.state.showColorPicker ? (
-                      <Container style={popover}>
-                        <Container
-                          style={cover}
-                          onClick={(event) =>
-                            this.handleBackgroundColorPickerClose(event)
-                          }
-                        />
-                        <SketchPicker
-                          color={this.state.background}
-                          onChange={this.handleBackgroundChange}
-                          onChangeComplete={this.handleBackgroundChangeComplete}
-                        />
-                      </Container>
-                    ) : null}
-                  </Row>
-
-                  {/*
-                   * Font color button
-                   */}
-                  <Row>
-                    <Button
-                      variant="secondary"
-                      className="buildStreamBtn"
-                      onClick={(event) =>
-                        this.handleFontColorPickerClick(event)
-                      }
-                    >
-                      Change Font Color
-                    </Button>
-                    {this.state.showFontColorPicker ? (
-                      <Container style={popover}>
-                        <Container
-                          style={cover}
-                          onClick={(event) =>
-                            this.handleFontColorPickerClose(event)
-                          }
-                        />
-                        <SketchPicker
-                          color={this.state.fontColor}
-                          onChange={this.handleFontChange}
-                          onChangeComplete={this.handleFontChangeComplete}
-                        />
-                      </Container>
-                    ) : null}
-                  </Row>
-
                   {/*
                    * Build restream layout buttons
                    */}

@@ -74,7 +74,7 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Add profile images
 - [x] Add color configuration in a modal that is accesible in the navigation bar
 - [x] Update body color in componentDidMount
-- [ ] Color modal crashes when click outside of component
+- [x] Fix color modal close method
 
 ### Race Layouts
 

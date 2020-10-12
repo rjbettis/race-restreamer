@@ -444,7 +444,7 @@ class Input extends Component {
         </Container>
         <Modal
           show={this.state.showModal}
-          onHide={(event) => this.handleClose(event)}
+          onHide={(event) => this.handleModalClose(event)}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered

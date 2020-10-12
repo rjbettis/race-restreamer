@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import PlayerNoButtons from './PlayerNoButtons';
+import PlayerNoButtonsWidthDependent from './PlayerNoButtonsWidthDependent';
 
-class Layout3NoButtons extends Component {
+class TwoStreamLayoutNoBtn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       streamOne: this.parseQueryString()[0],
       streamTwo: this.parseQueryString()[1],
-      streamThree: this.parseQueryString()[2],
       height: window.innerHeight,
       width: window.innerWidth,
     };
@@ -43,25 +42,16 @@ class Layout3NoButtons extends Component {
       <Container fluid={true} className="no-padding">
         <Row className="no-margin">
           <Col className="no-padding">
-            <PlayerNoButtons
+            <PlayerNoButtonsWidthDependent
               streamName={this.state.streamOne}
               windowWidth={this.state.width}
               windowHeight={this.state.height}
             />
           </Col>
           <Col className="no-padding">
-            <PlayerNoButtons
+            <PlayerNoButtonsWidthDependent
               streamName={this.state.streamTwo}
-              activeStreams={this.state.activeStreams}
-              windowHeight={this.state.height}
-            />
-          </Col>
-        </Row>
-        <Row xl={2} className="justify-content-md-center">
-          <Col className="no-padding">
-            <PlayerNoButtons
-              streamName={this.state.streamThree}
-              activeStreams={this.state.activeStreams}
+              windowWidth={this.state.width}
               windowHeight={this.state.height}
             />
           </Col>
@@ -71,4 +61,4 @@ class Layout3NoButtons extends Component {
   }
 }
 
-export default Layout3NoButtons;
+export default TwoStreamLayoutNoBtn;

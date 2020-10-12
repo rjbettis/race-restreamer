@@ -321,7 +321,7 @@ class Input extends Component {
                   <Row>
                     <Link
                       to={{
-                        pathname: `/Layout4`,
+                        pathname: `/FourStreamLayout`,
                         search: `?streams=${this.state.validChannels}`,
                         background: this.state.background,
                         fontColor: this.state.fontColor,
@@ -346,7 +346,7 @@ class Input extends Component {
                   <Row>
                     <Link
                       to={{
-                        pathname: `/Layout4`,
+                        pathname: `/FourStreamLayout`,
                         search: `?streams=${this.state.validChannels}`,
                       }}
                     >
@@ -358,7 +358,7 @@ class Input extends Component {
                   <Row>
                     <Link
                       to={{
-                        pathname: `/Layout4NoButtons`,
+                        pathname: `/FourStreamLayoutNoBtn`,
                         search: `?streams=${this.state.validChannels}`,
                       }}
                     >
@@ -381,7 +381,7 @@ class Input extends Component {
                   <Row>
                     <Link
                       to={{
-                        pathname: `/Layout3`,
+                        pathname: `/ThreeStreamLayout`,
                         search: `?streams=${this.state.validChannels}`,
                       }}
                     >
@@ -393,7 +393,7 @@ class Input extends Component {
                   <Row>
                     <Link
                       to={{
-                        pathname: `/Layout3NoButtons`,
+                        pathname: `/ThreeStreamLayoutNoBtn`,
                         search: `?streams=${this.state.validChannels}`,
                       }}
                     >
@@ -416,7 +416,7 @@ class Input extends Component {
                   <Row>
                     <Link
                       to={{
-                        pathname: `/Layout2`,
+                        pathname: `/TwoStreamLayout`,
                         search: `?streams=${this.state.validChannels}`,
                       }}
                     >
@@ -428,7 +428,7 @@ class Input extends Component {
                   <Row>
                     <Link
                       to={{
-                        pathname: `/Layout2NoButtons`,
+                        pathname: `/TwoStreamLayoutNoBtn`,
                         search: `?streams=${this.state.validChannels}`,
                       }}
                     >

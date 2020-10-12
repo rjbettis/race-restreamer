@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Input from './components/Input';
-import Layout2 from './components/Layout2';
-import Layout3 from './components/Layout3';
-import Layout4 from './components/Layout4';
-import Layout4NoButtons from './components/Layout4NoButtons';
-import Layout3NoButtons from './components/Layout3NoButtons';
-import Layout2NoButtons from './components/Layout2NoButtons';
+import TwoStreamLayout from './components/TwoStreamLayout';
+import ThreeStreamLayout from './components/ThreeStreamLayout';
+import FourStreamLayout from './components/FourStreamLayout';
+import FourStreamLayoutNoBtn from './components/FourStreamLayoutNoBtn';
+import ThreeStreamLayoutNoBtn from './components/ThreeStreamLayoutNoBtn';
+import TwoStreamLayoutNoBtn from './components/TwoStreamLayoutNoBtn';
 import './Custom.scss';
 import './App.css';
 
@@ -17,12 +17,28 @@ class App extends Component {
       <Container fluid={true} className="no-padding">
         <Router>
           <Route exact path="/" component={Input} />
-          <Route exact path="/Layout2" component={Layout2} />
-          <Route exact path="/Layout3" component={Layout3} />
-          <Route exact path="/Layout4" component={Layout4} />
-          <Route exact path="/Layout4NoButtons" component={Layout4NoButtons} />
-          <Route exact path="/Layout3NoButtons" component={Layout3NoButtons} />
-          <Route exact path="/Layout2NoButtons" component={Layout2NoButtons} />
+          <Route exact path="/TwoStreamLayout" component={TwoStreamLayout} />
+          <Route
+            exact
+            path="/ThreeStreamLayout"
+            component={ThreeStreamLayout}
+          />
+          <Route exact path="/FourStreamLayout" component={FourStreamLayout} />
+          <Route
+            exact
+            path="/FourStreamLayoutNoBtn"
+            component={FourStreamLayoutNoBtn}
+          />
+          <Route
+            exact
+            path="/ThreeStreamLayoutNoBtn"
+            component={ThreeStreamLayoutNoBtn}
+          />
+          <Route
+            exact
+            path="/TwoStreamLayoutNoBtn"
+            component={TwoStreamLayoutNoBtn}
+          />
         </Router>
       </Container>
     );

@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Player from './Player';
 import update from 'immutability-helper';
 
-class Layout2 extends Component {
+class TwoStreamLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,4 +95,4 @@ class Layout2 extends Component {
   }
 }
 
-export default Layout2;
+export default TwoStreamLayout;

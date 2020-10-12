@@ -31,14 +31,26 @@ React web application with a bootstrap frontend and AWS backend.
 
 1. Input
    - Provides a form for channel input. When submitted the app makes an API call to the backend to run a lambda function to verify the channel exists and checks the response. Channels are added to an array and passed to child components.
-2. RaceLayoutFour
-   - Reads the channel array and renders a layout for a 4+ person race.
-3. RaceLayoutThree
-   - Reads the channel array and renders a layout for a 3 person race.
-4. RaceLayoutTwo
-   - Reads the channel array and renders a layout for a 2 person race.
-5. SwapButtons
-   - Reads the channel array and renders toggle buttons to swap between channels.
+2. FourStreamLayout
+   - Reads the channel array and renders a layout for a 4+ person race with buttons to swap channels.
+3. ThreeStreamLayout
+   - Reads the channel array and renders a layout for a 3 person race with buttons to swap channels.
+4. TwoStreamLayout
+   - Reads the channel array and renders a layout for a 2 person race with buttons to swap channels.
+5. FourStreamLayoutNoBtn
+   - Reads the channel array and renders a static layout for a 4 person race.
+6. ThreeStreamLayoutNoBtn
+   - Reads the channel array and renders a static layout for a 3 person race.
+7. TwoStreamLayoutNoBtn
+   - Reads the channel array and renders a static layout for a 2 person race.
+8. Player
+   - Reads the channel array and builds a twitch player with channel buttons.
+9. SwapButtons
+   - Reads the channel array and builds toggle buttons to bring new channels in and out of the layout.
+10. PlayerNoButtons
+    - Reads the channel array and builds a twitch player without channel buttons.
+11. PlayerNoButtonsWidthDependent
+    - Reads the channel array and builds a twitch player without channel buttons. Designed to specifically work with the 2 channel layout.
 
 ## Todo
 
@@ -75,6 +87,7 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Add color configuration in a modal that is accesible in the navigation bar
 - [x] Update body color in componentDidMount
 - [x] Fix color modal close method
+- [x] Improve component names
 
 ### Race Layouts
 

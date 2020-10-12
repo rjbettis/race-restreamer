@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PlayerNoButtons from './PlayerNoButtons';
 
-class Layout4NoButtons extends Component {
+class FourStreamLayoutNoBtn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,4 +79,4 @@ class Layout4NoButtons extends Component {
   }
 }
 
-export default Layout4NoButtons;
+export default FourStreamLayoutNoBtn;

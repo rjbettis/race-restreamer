@@ -22,13 +22,6 @@ React web application with a bootstrap frontend and AWS backend.
 
 ## Pages
 
-1. Home
-   - Input channel names individually or by a comma separated list.
-2. Layout
-   - Will render a 2, 3 or 4 player layout and a group of buttons to swap around channels.
-
-## Components
-
 1. Input
    - Provides a form for channel input. When submitted the app makes an API call to the backend to run a lambda function to verify the channel exists and checks the response. Channels are added to an array and passed to child components.
 2. FourStreamLayout
@@ -43,14 +36,17 @@ React web application with a bootstrap frontend and AWS backend.
    - Reads the channel array and renders a static layout for a 3 person race.
 7. TwoStreamLayoutNoBtn
    - Reads the channel array and renders a static layout for a 2 person race.
-8. Player
+
+## Components
+
+1. Player
    - Reads the channel array and builds a twitch player with channel buttons.
-9. SwapButtons
+2. SwapButtons
    - Reads the channel array and builds toggle buttons to bring new channels in and out of the layout.
-10. PlayerNoButtons
-    - Reads the channel array and builds a twitch player without channel buttons.
-11. PlayerNoButtonsWidthDependent
-    - Reads the channel array and builds a twitch player without channel buttons. Designed to specifically work with the 2 channel layout.
+3. PlayerNoButtons
+   - Reads the channel array and builds a twitch player without channel buttons.
+4. PlayerNoButtonsWidthDependent
+   - Reads the channel array and builds a twitch player without channel buttons. Designed to specifically work with the 2 channel layout.
 
 ## Todo
 

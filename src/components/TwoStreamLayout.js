@@ -16,6 +16,9 @@ class TwoStreamLayout extends Component {
     this.changeRacer = this.changeRacer.bind(this);
   }
 
+  /*
+   * Parse search prop provided by react router
+   */
   parseQueryString() {
     let query = this.props.location.search;
     query = query.replace('?streams=', '');
@@ -23,6 +26,9 @@ class TwoStreamLayout extends Component {
     return query;
   }
 
+  /*
+   * Logic to handle channel switching
+   */
   changeRacer(racer, streamNum, racerIndex) {
     if (
       streamNum === '1' &&
@@ -52,15 +58,20 @@ class TwoStreamLayout extends Component {
   }
 
   render() {
+    //get window size to send to Player component for video sizing
     var width = window.innerWidth;
     console.log(width);
     var height = window.innerHeight;
     console.log(height);
+
     return (
       <Container fluid={true}>
         <Row xl={2}>
           <Col xl={6}>
             <Container className="zeroPaddingMarigin">
+              {/*
+                * render left Player component with given parameters
+                */}
               <Player
                 key={this.state.streamOne}
                 streamNum="1"
@@ -76,6 +87,9 @@ class TwoStreamLayout extends Component {
           </Col>
           <Col xl={6}>
             <Container className="zeroPaddingMarigin">
+              {/*
+                * render right Player component with given parameters
+                */}
               <Player
                 key={this.state.streamTwo}
                 streamNum="2"

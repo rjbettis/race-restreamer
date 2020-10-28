@@ -14,6 +14,7 @@ class TwoStreamLayoutNoBtn extends Component {
   }
 
   componentDidMount() {
+    //sets window size
     window.addEventListener('resize', this.updateDimensions);
     document.body.className = 'body-no-button-layout';
   }
@@ -22,6 +23,9 @@ class TwoStreamLayoutNoBtn extends Component {
     window.removeEventListener('resize', this.updateDimensions);
   }
 
+  /*
+   * Parse search prop provided by react router
+   */
   parseQueryString() {
     let query = this.props.location.search;
     query = query.replace('?streams=', '');

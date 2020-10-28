@@ -7,10 +7,15 @@ import {
   Col,
   Image,
   Modal,
+  Nav,
+  NavDropdown,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { SketchPicker } from 'react-color';
+
+import { GoogleLogin } from 'react-google-login';
+import { GoogleLogout } from 'react-google-login';
 
 class Input extends Component {
   constructor(props) {
@@ -35,6 +40,8 @@ class Input extends Component {
 
   async componentDidMount() {
     document.body.className = '';
+
+    //Fetches channels for the demo layout
     const response = await fetch(
       `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/demo-channels?category=retro`
     );
@@ -47,10 +54,17 @@ class Input extends Component {
     document.body.style.backgroundColor = '#f7f7f9';
   }
 
+  /*
+   * Updates searchValue state when typing in the input text box
+   */
+
   handleOnChange = (event) => {
     this.setState({ searchValue: event.target.value });
   };
 
+  /*
+   * Adds inputed channels to an array and makes an API call with the array as a parameter.
+   */
   handleSearch = (e) => {
     e.preventDefault();
 
@@ -67,7 +81,7 @@ class Input extends Component {
   };
 
   /*
-   * Makes API calls and builds valid and invalid channel lists.
+   * Makes API calls and builds a valid channel lists.
    */
   async makeApiCall(separatedArray) {
     const sepArray = separatedArray.map(async (channel) => {
@@ -81,11 +95,14 @@ class Input extends Component {
 
     console.log(res);
 
+    //loops on every entity in the response
     res.forEach((resp, index) => {
       if (resp._total > 0) {
+        //determines if the display_name in the API call matches a name in the validChannels array
         var n = this.state.validChannels.includes(resp.users[0].display_name);
 
         if (n === false) {
+          //add display_name to valid channels
           let validChannels = [...this.state.validChannels];
           validChannels.push(resp.users[0].display_name);
           this.setState({ validChannels: validChannels });
@@ -94,13 +111,16 @@ class Input extends Component {
           profileImages.push(resp.users[0].logo);
           this.setState({ profileImages: profileImages });
         }
+
         if (n === true) {
+          //render prompt to user that the channel exists in the validChannels array
           this.setState({
             existingChannel:
               resp.users[0].display_name + ' has already been added.',
           });
         }
       } else {
+        //render prompt to user that the channel does not exist
         this.setState({
           existingChannel: this.state.searchValue + ' does not exist.',
         });
@@ -111,6 +131,9 @@ class Input extends Component {
     this.setState({ searchValue: '' });
   }
 
+  /*
+   * Adds demoChannels to validChannels list.
+   */
   demo(demoChannels) {
     let test = demoChannels.streams;
     let channelNames = [...this.state.channelNames];
@@ -143,7 +166,9 @@ class Input extends Component {
   }
 */
 
-  //BACKGROUND
+  /*
+   * handles background color selection
+   */
   handleBackgroundChange = (color) => {
     this.setState({ background: color.hex });
   };
@@ -160,7 +185,9 @@ class Input extends Component {
     this.setState({ showColorPicker: false });
   }
 
-  // FONT
+  /*
+   * handles font selection
+   */
   handleFontChange = (color) => {
     this.setState({ fontColor: color.hex });
   };
@@ -177,7 +204,9 @@ class Input extends Component {
     this.setState({ showFontColorPicker: false });
   }
 
-  //modal control
+  /*
+   * Background/Font Modal control
+   */
   handleModalShow(event) {
     this.setState({
       showModal: true,
@@ -190,7 +219,16 @@ class Input extends Component {
     });
   }
 
+  googleLogin = (response) => {
+    this.setState({ GoogleLoginResponse: response, isLoggedIn: true });
+  };
+
+  googleLogout = (response) => {
+    this.setState({ GoogleLoginResponse: null, isLoggedIn: false });
+  };
+
   render() {
+    //Modal properties
     const popover = {
       position: 'absolute',
       zIndex: '2',
@@ -240,6 +278,54 @@ class Input extends Component {
           >
             Customize Layout Colors
           </Button>
+
+          {/*
+           * Google Login
+           */}
+          <Nav className="ml-auto">
+            {this.state.isLoggedIn ? (
+              <Container>
+                <img
+                  className="nav-img"
+                  src={this.state.GoogleLoginResponse.profileObj.imageUrl}
+                  height="40"
+                  width="40"
+                  alt="img"
+                />
+                <NavDropdown
+                  title={this.state.GoogleLoginResponse.profileObj.email}
+                  variant="secondary"
+                  onClick=""
+                >
+                  <NavDropdown.Item href="">Profile</NavDropdown.Item>
+
+                  <GoogleLogout
+                    clientId="1097939992919-lftp3shqik60gl553d4m4rdm9efijttm.apps.googleusercontent.com"
+                    render={(renderProps) => (
+                      <NavDropdown.Item
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                      >
+                        Logout
+                      </NavDropdown.Item>
+                    )}
+                    buttonText="Logout"
+                    onLogoutSuccess={this.googleLogout}
+                  ></GoogleLogout>
+                </NavDropdown>
+              </Container>
+            ) : null}
+            {this.state.isLoggedIn ? null : (
+              <GoogleLogin
+                clientId="1097939992919-lftp3shqik60gl553d4m4rdm9efijttm.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={this.googleLogin}
+                onFailure={this.googleLogin}
+                cookiePolicy={'single_host_origin'}
+                redirectUri="https://www.google.com/"
+              />
+            )}
+          </Nav>
         </Navbar>
 
         {/*
@@ -442,6 +528,9 @@ class Input extends Component {
             </Col>
           </Row>
         </Container>
+        {/*
+         * Modal component to select background and font colors
+         */}
         <Modal
           show={this.state.showModal}
           onHide={(event) => this.handleModalClose(event)}

@@ -35,6 +35,7 @@ class Input extends Component {
       background: '#fff',
       fontColor: '#000',
       showModal: false,
+      twitchLoggedIn: false,
     };
   }
 
@@ -50,6 +51,11 @@ class Input extends Component {
     this.setState({ demoChannels: res });
     this.setState({ showColorPicker: false });
     this.setState({ showFontColorPicker: false });
+
+    if (this.props.location.userData) {
+      this.setState({ twitchUserData: this.props.location.userData });
+      this.setState({ twitchLoggedIn: true });
+    }
 
     document.body.style.backgroundColor = '#f7f7f9';
   }
@@ -227,6 +233,12 @@ class Input extends Component {
     this.setState({ GoogleLoginResponse: null, isLoggedIn: false });
   };
 
+  handleTwitchLogout(event) {
+    console.log('logout');
+    this.setState({ twitchLoggedIn: false });
+    this.setState({ twitchUserData: null });
+  }
+
   render() {
     //Modal properties
     const popover = {
@@ -268,9 +280,11 @@ class Input extends Component {
           >
             Populate Demo Layout
           </Button>
+
           {/*
            * Modal for colors
            */}
+
           <Button
             type="submit"
             variant="secondary"
@@ -280,8 +294,48 @@ class Input extends Component {
           </Button>
 
           {/*
+           * Twitch Login
+           *
+           * TODO: use response "code" as API Gateway parameter. Move auth node module to lambda
+           */}
+          <Nav className="ml-auto">
+            {this.state.twitchLoggedIn ? (
+              <Container>
+                <img
+                  className="nav-img"
+                  src={this.state.twitchUserData.picture}
+                  height="40"
+                  width="40"
+                  alt="img"
+                />
+                <NavDropdown
+                  title={this.state.twitchUserData.preferred_username}
+                  variant="secondary"
+                  onClick=""
+                >
+                  <NavDropdown.Item href="">Profile</NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={(event) => this.handleTwitchLogout(event)}
+                  >
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Container>
+            ) : (
+              <Button
+                type="submit"
+                variant="secondary"
+                href='https://id.twitch.tv/oauth2/authorize?client_id=<client_id>&redirect_uri=http://localhost:3000/TwitchAuth&response_type=code&scope=openid&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"picture":null,"preferred_username":null,"email":null}}'
+              >
+                Twitch Login
+              </Button>
+            )}
+          </Nav>
+
+          {/*
            * Google Login
            */}
+
           <Nav className="ml-auto">
             {this.state.isLoggedIn ? (
               <Container>
@@ -321,6 +375,7 @@ class Input extends Component {
                 buttonText="Login"
                 onSuccess={this.googleLogin}
                 onFailure={this.googleLogin}
+                isSignedIn={true}
                 cookiePolicy={'single_host_origin'}
                 redirectUri="https://www.google.com/"
               />
@@ -332,8 +387,6 @@ class Input extends Component {
          * Container for everything
          */}
         <Container>
-          <Row></Row>
-
           {/*
            * Channel input form
            */}

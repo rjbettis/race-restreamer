@@ -181,3 +181,12 @@
 .navbarText {
   color: #ffffff;
 }
+
+.twitch-btn {
+  background-color: #9146ff;
+  margin-right: 10px;
+}
+
+.twitch-btn:hover {
+  background-color: #6f36c4;
+}

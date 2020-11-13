@@ -224,14 +224,22 @@ class Input extends Component {
       showModal: false,
     });
   }
-
+  /*
   googleLogin = (response) => {
-    this.setState({ GoogleLoginResponse: response, isLoggedIn: true });
+    this.setState({ GoogleLoginResponse: response, googleLoggedIn: true });
+  };
+
+  googleLoginFailure = (response) => {
+    this.setState({ GoogleLoginResponse: response });
   };
 
   googleLogout = (response) => {
-    this.setState({ GoogleLoginResponse: null, isLoggedIn: false });
+    this.setState({ GoogleLoginResponse: null, googleLoggedIn: false });
   };
+*/
+  twitchLogin(event) {
+    this.setState({ twitchLoggedIn: true });
+  }
 
   handleTwitchLogout(event) {
     console.log('logout');
@@ -293,12 +301,13 @@ class Input extends Component {
             Customize Layout Colors
           </Button>
 
-          {/*
-           * Twitch Login
-           *
-           * TODO: use response "code" as API Gateway parameter. Move auth node module to lambda
-           */}
+          <Nav className="ml-auto"></Nav>
+
           <Nav className="ml-auto">
+            {/*
+             * Twitch Login
+             */}
+
             {this.state.twitchLoggedIn ? (
               <Container>
                 <img
@@ -321,23 +330,22 @@ class Input extends Component {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Container>
-            ) : (
+            ) : this.state.googleLoggedIn ? null : (
               <Button
+                className="twitch-btn"
                 type="submit"
                 variant="secondary"
-                href='https://id.twitch.tv/oauth2/authorize?client_id=<client_id>&redirect_uri=http://localhost:3000/TwitchAuth&response_type=code&scope=openid&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"picture":null,"preferred_username":null,"email":null}}'
+                href='https://id.twitch.tv/oauth2/authorize?client_id=sunqwbsa4fs7eckp3upvlct00luz4s&redirect_uri=http://localhost:3000/TwitchAuth&response_type=code&scope=openid&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"picture":null,"preferred_username":null,"email":null}}'
               >
                 Twitch Login
               </Button>
             )}
-          </Nav>
 
-          {/*
-           * Google Login
-           */}
-
-          <Nav className="ml-auto">
-            {this.state.isLoggedIn ? (
+            {/*
+             * Google Login
+             */}
+            {/* 
+            {this.state.googleLoggedIn ? (
               <Container>
                 <img
                   className="nav-img"
@@ -368,18 +376,18 @@ class Input extends Component {
                   ></GoogleLogout>
                 </NavDropdown>
               </Container>
-            ) : null}
-            {this.state.isLoggedIn ? null : (
+            ) : this.state.twitchLoggedIn ? null : (
               <GoogleLogin
                 clientId="1097939992919-lftp3shqik60gl553d4m4rdm9efijttm.apps.googleusercontent.com"
                 buttonText="Login"
                 onSuccess={this.googleLogin}
-                onFailure={this.googleLogin}
+                onFailure={this.googleLoginFailure}
                 isSignedIn={true}
                 cookiePolicy={'single_host_origin'}
                 redirectUri="https://www.google.com/"
               />
             )}
+            */}
           </Nav>
         </Navbar>
 

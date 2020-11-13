@@ -306,6 +306,7 @@ class Input extends Component {
           <Nav className="ml-auto">
             {/*
              * Twitch Login
+             *
              */}
 
             {this.state.twitchLoggedIn ? (
@@ -335,7 +336,7 @@ class Input extends Component {
                 className="twitch-btn"
                 type="submit"
                 variant="secondary"
-                href="https://id.twitch.tv/oauth2/authorize?client_id=sunqwbsa4fs7eckp3upvlct00luz4s&redirect_uri=http://localhost:3000/TwitchAuth&response_type=code&scope=user:read:email"
+                href="https://id.twitch.tv/oauth2/authorize?client_id=sunqwbsa4fs7eckp3upvlct00luz4s&redirect_uri=http://localhost:3000/TwitchAuth&response_type=code"
               >
                 Twitch Login
               </Button>

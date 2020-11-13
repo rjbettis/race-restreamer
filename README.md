@@ -59,7 +59,7 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Make simple layouts that do not require an account
 - [x] Demo
 - [ ] User accounts (login through twitch API)
-- [ ] Make component to build and customize a layout
+- [ ] Make component to build and customize a simple layout
 - [ ] Make advanced layout component
 - [ ] Layout saving
 

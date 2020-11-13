@@ -115,6 +115,16 @@ React web application with a bootstrap frontend and AWS backend.
 - [x] Update player container on channel swap
 - [x] Move buttons to new component to increase modularity
 
+### User Authentication and Authorization
+
+- [x] Plan OAuth flow
+- [x] Send user to twitch login for authentication
+- [x] Write lambda function to use authentication code response to get access token
+- [x] Write lambda function to get user data using access token
+- [x] API call in front-end to authorize user
+- [] Store access token and refresh token in database
+- [] Set up access token validation to keep user authorized and logged in upon return to app
+
 ### Advanced Input
 
 - [ ] Determine advanced layout functionality before making this todo list

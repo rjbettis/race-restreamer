@@ -312,13 +312,13 @@ class Input extends Component {
               <Container>
                 <img
                   className="nav-img"
-                  src={this.state.twitchUserData.picture}
+                  src={this.state.twitchUserData.profile_image_url}
                   height="40"
                   width="40"
                   alt="img"
                 />
                 <NavDropdown
-                  title={this.state.twitchUserData.preferred_username}
+                  title={this.state.twitchUserData.display_name}
                   variant="secondary"
                   onClick=""
                 >
@@ -330,12 +330,12 @@ class Input extends Component {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Container>
-            ) : this.state.googleLoggedIn ? null : (
+            ) : (
               <Button
                 className="twitch-btn"
                 type="submit"
                 variant="secondary"
-                href='https://id.twitch.tv/oauth2/authorize?client_id=sunqwbsa4fs7eckp3upvlct00luz4s&redirect_uri=http://localhost:3000/TwitchAuth&response_type=code&scope=openid&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"picture":null,"preferred_username":null,"email":null}}'
+                href="https://id.twitch.tv/oauth2/authorize?client_id=sunqwbsa4fs7eckp3upvlct00luz4s&redirect_uri=http://localhost:3000/TwitchAuth&response_type=code&scope=user:read:email"
               >
                 Twitch Login
               </Button>

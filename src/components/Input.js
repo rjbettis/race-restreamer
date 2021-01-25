@@ -35,7 +35,6 @@ class Input extends Component {
       background: '#fff',
       fontColor: '#000',
       showModal: false,
-      twitchLoggedIn: false,
     };
   }
 
@@ -301,49 +300,7 @@ class Input extends Component {
             Customize Layout Colors
           </Button>
 
-          <Nav className="ml-auto"></Nav>
-
           <Nav className="ml-auto">
-            {/*
-             * Twitch Login
-             *
-             
-
-            {this.state.twitchLoggedIn ? (
-              <Container>
-                <img
-                  className="nav-img"
-                  src={this.state.twitchUserData.profile_image_url}
-                  height="40"
-                  width="40"
-                  alt="img"
-                />
-                <NavDropdown
-                  title={this.state.twitchUserData.display_name}
-                  variant="secondary"
-                  onClick=""
-                >
-                  <NavDropdown.Item href="">Profile</NavDropdown.Item>
-                  <NavDropdown.Item
-                    onClick={(event) => this.handleTwitchLogout(event)}
-                  >
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Container>
-            ) : (
-              <Button
-                className="twitch-btn"
-                type="submit"
-                variant="secondary"
-                href="https://id.twitch.tv/oauth2/authorize?client_id=sunqwbsa4fs7eckp3upvlct00luz4s&redirect_uri=http://localhost:3000/TwitchAuth&response_type=code"
-              >
-                Twitch Login
-              </Button>
-            )}
-              
-            */}
-
             {this.state.googleLoggedIn ? (
               <Container>
                 <img
@@ -375,7 +332,7 @@ class Input extends Component {
                   ></GoogleLogout>
                 </NavDropdown>
               </Container>
-            ) : this.state.twitchLoggedIn ? null : (
+            ) : (
               <GoogleLogin
                 clientId="1097939992919-lftp3shqik60gl553d4m4rdm9efijttm.apps.googleusercontent.com"
                 buttonText="Login"

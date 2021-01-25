@@ -224,7 +224,7 @@ class Input extends Component {
       showModal: false,
     });
   }
-  /*
+
   googleLogin = (response) => {
     this.setState({ GoogleLoginResponse: response, googleLoggedIn: true });
   };
@@ -236,7 +236,7 @@ class Input extends Component {
   googleLogout = (response) => {
     this.setState({ GoogleLoginResponse: null, googleLoggedIn: false });
   };
-*/
+
   twitchLogin(event) {
     this.setState({ twitchLoggedIn: true });
   }
@@ -307,7 +307,7 @@ class Input extends Component {
             {/*
              * Twitch Login
              *
-             */}
+             
 
             {this.state.twitchLoggedIn ? (
               <Container>
@@ -341,11 +341,9 @@ class Input extends Component {
                 Twitch Login
               </Button>
             )}
+              
+            */}
 
-            {/*
-             * Google Login
-             */}
-            {/* 
             {this.state.googleLoggedIn ? (
               <Container>
                 <img
@@ -388,7 +386,6 @@ class Input extends Component {
                 redirectUri="https://www.google.com/"
               />
             )}
-            */}
           </Nav>
         </Navbar>
 

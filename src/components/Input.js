@@ -35,6 +35,7 @@ class Input extends Component {
       background: '#fff',
       fontColor: '#000',
       showModal: false,
+      test: 'test',
     };
   }
 
@@ -236,6 +237,24 @@ class Input extends Component {
     this.setState({ GoogleLoginResponse: null, googleLoggedIn: false });
   };
 
+  refreshTokenSetup = (res) => {
+    let refreshTiming = (res.tokenObj.expires_in || 3600 - 5 * 60) * 1000;
+
+    const refreshToken = async () => {
+      const newAuthRes = await res.reloadAuthResponse();
+      refreshTiming = (newAuthRes.expires_in || 3600 - 5 * 60) * 1000;
+      console.log('newAuthRes:', newAuthRes);
+      // saveUserToken(newAuthRes.access_token);  <-- save new token
+      localStorage.setItem('authToken', newAuthRes.id_token);
+
+      // Setup the other timer after the first one
+      setTimeout(refreshToken, refreshTiming);
+    };
+
+    // Setup first refresh timer
+    setTimeout(refreshToken, refreshTiming);
+  };
+
   twitchLogin(event) {
     this.setState({ twitchLoggedIn: true });
   }
@@ -315,7 +334,19 @@ class Input extends Component {
                   variant="secondary"
                   onClick=""
                 >
-                  <NavDropdown.Item href="">Profile</NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link
+                      to={{
+                        pathname: 'Profile',
+                        state: {
+                          googleLoggedIn: this.state.googleLoggedIn,
+                          GoogleLoginResponse: this.state.GoogleLoginResponse,
+                        },
+                      }}
+                    >
+                      Profile
+                    </Link>
+                  </NavDropdown.Item>
 
                   <GoogleLogout
                     clientId="1097939992919-lftp3shqik60gl553d4m4rdm9efijttm.apps.googleusercontent.com"

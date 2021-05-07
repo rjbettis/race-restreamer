@@ -35,7 +35,7 @@ class Input extends Component {
       background: '#fff',
       fontColor: '#000',
       showModal: false,
-      test: 'test',
+      btnToggle: true,
     };
   }
 
@@ -223,6 +223,18 @@ class Input extends Component {
     this.setState({
       showModal: false,
     });
+  }
+
+  /*
+   * Handle button checkbox toggle
+   */
+
+  handleBtnCheckboxToggle(event) {
+    if (this.state.btnToggle === false) {
+      this.setState({ btnToggle: true });
+    } else if (this.state.btnToggle === true) {
+      this.setState({ btnToggle: false });
+    }
   }
 
   googleLogin = (response) => {
@@ -480,13 +492,22 @@ class Input extends Component {
                     <Link
                       to={{
                         pathname: `/FourStreamLayout`,
-                        search: `?streams=${this.state.validChannels}`,
+                        search: `?streams=${this.state.validChannels}?btnToggle=${this.state.btnToggle}`,
                       }}
                     >
                       <Button variant="secondary" className="buildStreamBtn">
                         Build Restream Layout With Buttons
                       </Button>
                     </Link>
+                    <Form>
+                      <Form.Check
+                        type="checkbox"
+                        label="No buttons"
+                        id="btn"
+                        name="formBtnCheckbox"
+                        onClick={(event) => this.handleBtnCheckboxToggle(event)}
+                      ></Form.Check>
+                    </Form>
                   </Row>
                   <Row>
                     <Link

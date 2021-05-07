@@ -12,6 +12,7 @@ class FourStreamLayout extends Component {
       streamTwo: this.parseQueryString()[1],
       streamThree: this.parseQueryString()[2],
       streamFour: this.parseQueryString()[3],
+      btnToggle: this.parseQueryStringBtnToggle(),
       activeStreams: [0, 1, 2, 3],
       height: window.innerHeight,
       width: window.innerWidth,
@@ -26,8 +27,18 @@ class FourStreamLayout extends Component {
 
   parseQueryString() {
     let query = this.props.location.search;
-    query = query.replace('?streams=', '');
+    var btnIndex = query.indexOf('?btnToggle=');
+    query = query.substring(9, btnIndex);
     query = query.split(',');
+
+    return query;
+  }
+
+  parseQueryStringBtnToggle() {
+    let query = this.props.location.search;
+    var btnIndex = query.indexOf('?btnToggle=');
+    query = query.substring(btnIndex + 11, query.length);
+
     return query;
   }
 

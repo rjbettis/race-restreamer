@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import PlayerNoButtons from './PlayerNoButtons';
+import PlayerNoButtons from '../PlayerNoButtons';
 
-class FourStreamLayoutNoBtn extends Component {
+class ThreeStreamLayoutNoBtn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       streamOne: this.parseQueryString()[0],
       streamTwo: this.parseQueryString()[1],
       streamThree: this.parseQueryString()[2],
-      streamFour: this.parseQueryString()[3],
       height: window.innerHeight,
       width: window.innerWidth,
     };
@@ -58,17 +57,10 @@ class FourStreamLayoutNoBtn extends Component {
             />
           </Col>
         </Row>
-        <Row className="no-margin">
+        <Row xl={2} className="justify-content-md-center">
           <Col className="no-padding">
             <PlayerNoButtons
               streamName={this.state.streamThree}
-              activeStreams={this.state.activeStreams}
-              windowHeight={this.state.height}
-            />
-          </Col>
-          <Col className="no-padding">
-            <PlayerNoButtons
-              streamName={this.state.streamFour}
               activeStreams={this.state.activeStreams}
               windowHeight={this.state.height}
             />
@@ -79,4 +71,4 @@ class FourStreamLayoutNoBtn extends Component {
   }
 }
 
-export default FourStreamLayoutNoBtn;
+export default ThreeStreamLayoutNoBtn;

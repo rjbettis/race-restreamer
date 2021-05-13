@@ -35,7 +35,9 @@ class Input extends Component {
       background: '#fff',
       fontColor: '#000',
       showModal: false,
-      btnToggle: true,
+      btnToggle: false,
+      channelNum: 0,
+      layoutPathname: '',
     };
   }
 
@@ -112,6 +114,16 @@ class Input extends Component {
           let validChannels = [...this.state.validChannels];
           validChannels.push(resp.users[0].display_name);
           this.setState({ validChannels: validChannels });
+
+          //sets number of channels to a state for layout pathname
+          this.setState({ channelNum: this.state.channelNum + 1 });
+          if (this.state.channelNum === 2) {
+            this.setState({ layoutPathname: 'Two' });
+          } else if (this.state.channelNum === 3) {
+            this.setState({ layoutPathname: 'Three' });
+          } else if (this.state.channelNum === 4) {
+            this.setState({ layoutPathname: 'Four' });
+          }
 
           let profileImages = [...this.state.profileImages];
           profileImages.push(resp.users[0].logo);
@@ -455,143 +467,71 @@ class Input extends Component {
              * Right hand column with buttons to build the layout
              */}
             <Col>
-              {/*
-               * Conditionally renders when user inputs more than 4 channels
-               */}
+              {this.state.channelNum === 4 ||
+              this.state.channelNum === 3 ||
+              this.state.channelNum === 2 ? (
+                <Form>
+                  <Form.Check
+                    type="checkbox"
+                    label="Add buttons to swap streams?"
+                    id="btn"
+                    name="btnCheckbox"
+                    onClick={(event) => this.handleBtnCheckboxToggle(event)}
+                  ></Form.Check>
+
+                  {
+                    /*
+                     * Links to component without buttons when checkbox is selected
+                     * Links to component with buttons when checkbox is not selected
+                     */
+
+                    this.state.btnToggle ? (
+                      <Link
+                        to={{
+                          pathname: `/${this.state.layoutPathname}StreamLayout`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Generate Restreamer
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Link
+                        to={{
+                          pathname: `/${this.state.layoutPathname}StreamLayoutNoBtn`,
+                          search: `?streams=${this.state.validChannels}`,
+                        }}
+                      >
+                        <Button variant="secondary" className="buildStreamBtn">
+                          Generate Restreamer
+                        </Button>
+                      </Link>
+                    )
+                  }
+                </Form>
+              ) : null}
+
               {this.state.validChannels.length > 4 ? (
-                <Container fluid={true}>
-                  {/*
-                   * Build restream layout button
-                   */}
-                  <Row>
+                <Form>
+                  {
+                    /*
+                     * Links to component without buttons when checkbox is selected
+                     * Links to component with buttons when checkbox is not selected
+                     */
+
                     <Link
                       to={{
                         pathname: `/FourStreamLayout`,
                         search: `?streams=${this.state.validChannels}`,
-                        background: this.state.background,
-                        fontColor: this.state.fontColor,
                       }}
                     >
                       <Button variant="secondary" className="buildStreamBtn">
-                        Build Restream Layout
+                        Generate Restreamer
                       </Button>
                     </Link>
-                  </Row>
-                </Container>
-              ) : null}
-
-              {/*
-               * Conditionally renders when user inputs exactly 4 channels
-               */}
-              {this.state.validChannels.length === 4 ? (
-                <React.Fragment>
-                  {/*
-                   * Build restream layout buttons
-                   */}
-                  <Row>
-                    <Link
-                      to={{
-                        pathname: `/FourStreamLayout`,
-                        search: `?streams=${this.state.validChannels}?btnToggle=${this.state.btnToggle}`,
-                      }}
-                    >
-                      <Button variant="secondary" className="buildStreamBtn">
-                        Build Restream Layout With Buttons
-                      </Button>
-                    </Link>
-                    <Form>
-                      <Form.Check
-                        type="checkbox"
-                        label="No buttons"
-                        id="btn"
-                        name="formBtnCheckbox"
-                        onClick={(event) => this.handleBtnCheckboxToggle(event)}
-                      ></Form.Check>
-                    </Form>
-                  </Row>
-                  <Row>
-                    <Link
-                      to={{
-                        pathname: `/FourStreamLayoutNoBtn`,
-                        search: `?streams=${this.state.validChannels}`,
-                      }}
-                    >
-                      <Button variant="secondary" className="buildStreamBtn">
-                        Build Restream Layout Without Buttons
-                      </Button>
-                    </Link>
-                  </Row>
-                </React.Fragment>
-              ) : null}
-
-              {/*
-               * Conditionally renders when user inputs exactly 3 channels
-               */}
-              {this.state.validChannels.length === 3 ? (
-                <React.Fragment>
-                  {/*
-                   * Build restream layout buttons
-                   */}
-                  <Row>
-                    <Link
-                      to={{
-                        pathname: `/ThreeStreamLayout`,
-                        search: `?streams=${this.state.validChannels}`,
-                      }}
-                    >
-                      <Button variant="secondary" className="buildStreamBtn">
-                        Build Restream Layout With Buttons
-                      </Button>
-                    </Link>
-                  </Row>
-                  <Row>
-                    <Link
-                      to={{
-                        pathname: `/ThreeStreamLayoutNoBtn`,
-                        search: `?streams=${this.state.validChannels}`,
-                      }}
-                    >
-                      <Button variant="secondary" className="buildStreamBtn">
-                        Build Restream Layout Without Buttons
-                      </Button>
-                    </Link>
-                  </Row>
-                </React.Fragment>
-              ) : null}
-
-              {/*
-               * Conditionally renders when user inputs exactly 2 channels
-               */}
-              {this.state.validChannels.length === 2 ? (
-                <React.Fragment>
-                  {/*
-                   * Build restream layout buttons
-                   */}
-                  <Row>
-                    <Link
-                      to={{
-                        pathname: `/TwoStreamLayout`,
-                        search: `?streams=${this.state.validChannels}`,
-                      }}
-                    >
-                      <Button variant="secondary" className="buildStreamBtn">
-                        Build Restream Layout With Buttons
-                      </Button>
-                    </Link>
-                  </Row>
-                  <Row>
-                    <Link
-                      to={{
-                        pathname: `/TwoStreamLayoutNoBtn`,
-                        search: `?streams=${this.state.validChannels}`,
-                      }}
-                    >
-                      <Button variant="secondary" className="buildStreamBtn">
-                        Build Restream Layout Without Buttons
-                      </Button>
-                    </Link>
-                  </Row>
-                </React.Fragment>
+                  }
+                </Form>
               ) : null}
             </Col>
           </Row>

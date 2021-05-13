@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Player from './Player';
+import Player from '../Player';
 import update from 'immutability-helper';
 
 class TwoStreamLayout extends Component {
@@ -70,8 +70,8 @@ class TwoStreamLayout extends Component {
           <Col xl={6}>
             <Container className="zeroPaddingMarigin">
               {/*
-                * render left Player component with given parameters
-                */}
+               * render left Player component with given parameters
+               */}
               <Player
                 key={this.state.streamOne}
                 streamNum="1"
@@ -88,8 +88,8 @@ class TwoStreamLayout extends Component {
           <Col xl={6}>
             <Container className="zeroPaddingMarigin">
               {/*
-                * render right Player component with given parameters
-                */}
+               * render right Player component with given parameters
+               */}
               <Player
                 key={this.state.streamTwo}
                 streamNum="2"

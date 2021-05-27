@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import PlayerNoButtonsWidthDependent from '../PlayerNoButtonsWidthDependent';
+import PlayerNoButtonsWidthDependent from '../players/PlayerNoButtonsWidthDependent';
 
 class TwoStreamLayoutNoBtn extends Component {
   constructor(props) {

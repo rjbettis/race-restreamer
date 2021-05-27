@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import PlayerNoButtons from '../PlayerNoButtons';
+import PlayerNoButtons from '../players/PlayerNoButtons';
 
 class ThreeStreamLayoutNoBtn extends Component {
   constructor(props) {

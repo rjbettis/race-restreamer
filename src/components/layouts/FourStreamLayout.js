@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Player from '../Player';
+import Player from '../players/Player';
 import update from 'immutability-helper';
 
 class FourStreamLayout extends Component {

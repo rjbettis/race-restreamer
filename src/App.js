@@ -8,7 +8,6 @@ import FourStreamLayout from './components/layouts/FourStreamLayout';
 import FourStreamLayoutNoBtn from './components/layouts/FourStreamLayoutNoBtn';
 import ThreeStreamLayoutNoBtn from './components/layouts/ThreeStreamLayoutNoBtn';
 import TwoStreamLayoutNoBtn from './components/layouts/TwoStreamLayoutNoBtn';
-import TwitchAuth from './components/TwitchAuth';
 import Profile from './components/Profile';
 import './Custom.scss';
 import './App.css';
@@ -41,7 +40,6 @@ class App extends Component {
             path="/TwoStreamLayoutNoBtn"
             component={TwoStreamLayoutNoBtn}
           />
-          <Route exact path="/TwitchAuth" component={TwitchAuth} />
           <Route exact path="/Profile" component={Profile} />
         </Router>
       </Container>

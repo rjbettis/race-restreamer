@@ -23,15 +23,11 @@ class Input extends Component {
     this.state = {
       searchValue: '',
       validChannels: [],
-      invalidChannels: [],
       existingChannel: '',
-      existingChannels: [],
       demoChannels: [],
       channelNames: [],
-      sortCheckbox: false,
       profileImages: [],
       demoImages: [],
-      logoName: [],
       background: '#fff',
       fontColor: '#000',
       showModal: false,
@@ -169,22 +165,6 @@ class Input extends Component {
   }
 
   /*
-
-  alphabetical sort for validChannels. does not sort logo array
-
-  handleSortToggle(event) {
-    if (this.state.sortCheckbox === false) {
-      this.setState({ sortCheckbox: true });
-      this.state.validChannels.sort(function (a, b) {
-        return a.toLowerCase().localeCompare(b.toLowerCase());
-      });
-    } else if (this.state.sortCheckbox === true) {
-      this.setState({ sortCheckbox: false });
-    }
-  }
-*/
-
-  /*
    * handles background color selection
    */
   handleBackgroundChange = (color) => {
@@ -249,6 +229,10 @@ class Input extends Component {
     }
   }
 
+  /*
+   * Google Auth
+   */
+
   googleLogin = (response) => {
     this.setState({ GoogleLoginResponse: response, googleLoggedIn: true });
   };
@@ -260,34 +244,6 @@ class Input extends Component {
   googleLogout = (response) => {
     this.setState({ GoogleLoginResponse: null, googleLoggedIn: false });
   };
-
-  refreshTokenSetup = (res) => {
-    let refreshTiming = (res.tokenObj.expires_in || 3600 - 5 * 60) * 1000;
-
-    const refreshToken = async () => {
-      const newAuthRes = await res.reloadAuthResponse();
-      refreshTiming = (newAuthRes.expires_in || 3600 - 5 * 60) * 1000;
-      console.log('newAuthRes:', newAuthRes);
-      // saveUserToken(newAuthRes.access_token);  <-- save new token
-      localStorage.setItem('authToken', newAuthRes.id_token);
-
-      // Setup the other timer after the first one
-      setTimeout(refreshToken, refreshTiming);
-    };
-
-    // Setup first refresh timer
-    setTimeout(refreshToken, refreshTiming);
-  };
-
-  twitchLogin(event) {
-    this.setState({ twitchLoggedIn: true });
-  }
-
-  handleTwitchLogout(event) {
-    console.log('logout');
-    this.setState({ twitchLoggedIn: false });
-    this.setState({ twitchUserData: null });
-  }
 
   render() {
     //Modal properties

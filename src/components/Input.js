@@ -441,29 +441,17 @@ class Input extends Component {
                      * Links to component with buttons when checkbox is not selected
                      */
 
-                    this.state.btnToggle ? (
-                      <Link
-                        to={{
-                          pathname: `/${this.state.layoutPathname}StreamLayout`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Generate Restreamer
-                        </Button>
-                      </Link>
-                    ) : (
-                      <Link
-                        to={{
-                          pathname: `/${this.state.layoutPathname}StreamLayoutNoBtn`,
-                          search: `?streams=${this.state.validChannels}`,
-                        }}
-                      >
-                        <Button variant="secondary" className="buildStreamBtn">
-                          Generate Restreamer
-                        </Button>
-                      </Link>
-                    )
+                    <Link
+                      to={{
+                        pathname: `/${this.state.layoutPathname}StreamLayout`,
+                        search: `?streams=${this.state.validChannels}`,
+                        btn: this.state.btnToggle,
+                      }}
+                    >
+                      <Button variant="secondary" className="buildStreamBtn">
+                        Generate Restreamer
+                      </Button>
+                    </Link>
                   }
                 </Form>
               ) : null}

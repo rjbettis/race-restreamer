@@ -5,8 +5,6 @@ import Input from './components/Input';
 import TwoStreamLayout from './components/layouts/TwoStreamLayout';
 import ThreeStreamLayout from './components/layouts/ThreeStreamLayout';
 import FourStreamLayout from './components/layouts/FourStreamLayout';
-import ThreeStreamLayoutNoBtn from './components/layouts/ThreeStreamLayoutNoBtn';
-import TwoStreamLayoutNoBtn from './components/layouts/TwoStreamLayoutNoBtn';
 import './Custom.scss';
 import './App.css';
 
@@ -23,16 +21,6 @@ class App extends Component {
             component={ThreeStreamLayout}
           />
           <Route exact path="/FourStreamLayout" component={FourStreamLayout} />
-          <Route
-            exact
-            path="/ThreeStreamLayoutNoBtn"
-            component={ThreeStreamLayoutNoBtn}
-          />
-          <Route
-            exact
-            path="/TwoStreamLayoutNoBtn"
-            component={TwoStreamLayoutNoBtn}
-          />
         </Router>
       </Container>
     );

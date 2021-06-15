@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Player from '../players/Player';
 import update from 'immutability-helper';
+import PlayerNoButtons from '../players/PlayerNoButtons';
 
 class ThreeStreamLayout extends Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class ThreeStreamLayout extends Component {
       streamTwo: this.parseQueryString()[1],
       streamThree: this.parseQueryString()[2],
       activeStreams: [0, 1, 2],
+      height: window.innerHeight,
+      width: window.innerWidth,
     };
 
     this.changeRacer = this.changeRacer.bind(this);
@@ -70,7 +73,7 @@ class ThreeStreamLayout extends Component {
     var height = window.innerHeight;
     console.log(height);
 
-    return (
+    return this.props.location.btn === true ? (
       <Container fluid={true}>
         <Row xl={2}>
           <Col xl={6}>
@@ -119,6 +122,34 @@ class ThreeStreamLayout extends Component {
                 layout={3}
               />
             </Container>
+          </Col>
+        </Row>
+      </Container>
+    ) : (
+      <Container fluid={true} className="no-padding">
+        <Row className="no-margin">
+          <Col className="no-padding">
+            <PlayerNoButtons
+              streamName={this.state.streamOne}
+              windowWidth={this.state.width}
+              windowHeight={this.state.height}
+            />
+          </Col>
+          <Col className="no-padding">
+            <PlayerNoButtons
+              streamName={this.state.streamTwo}
+              activeStreams={this.state.activeStreams}
+              windowHeight={this.state.height}
+            />
+          </Col>
+        </Row>
+        <Row xl={2} className="justify-content-md-center">
+          <Col className="no-padding">
+            <PlayerNoButtons
+              streamName={this.state.streamThree}
+              activeStreams={this.state.activeStreams}
+              windowHeight={this.state.height}
+            />
           </Col>
         </Row>
       </Container>

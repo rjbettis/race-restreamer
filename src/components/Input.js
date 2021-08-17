@@ -7,15 +7,10 @@ import {
   Col,
   Image,
   Modal,
-  Nav,
-  NavDropdown,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { SketchPicker } from 'react-color';
-
-import { GoogleLogin } from 'react-google-login';
-import { GoogleLogout } from 'react-google-login';
 
 class Input extends Component {
   constructor(props) {
@@ -49,11 +44,6 @@ class Input extends Component {
     this.setState({ demoChannels: res });
     this.setState({ showColorPicker: false });
     this.setState({ showFontColorPicker: false });
-
-    if (this.props.location.userData) {
-      this.setState({ twitchUserData: this.props.location.userData });
-      this.setState({ twitchLoggedIn: true });
-    }
 
     document.body.style.backgroundColor = '#f7f7f9';
   }
@@ -229,22 +219,6 @@ class Input extends Component {
     }
   }
 
-  /*
-   * Google Auth
-   */
-
-  googleLogin = (response) => {
-    this.setState({ GoogleLoginResponse: response, googleLoggedIn: true });
-  };
-
-  googleLoginFailure = (response) => {
-    this.setState({ GoogleLoginResponse: response });
-  };
-
-  googleLogout = (response) => {
-    this.setState({ GoogleLoginResponse: null, googleLoggedIn: false });
-  };
-
   render() {
     //Modal properties
     const popover = {
@@ -298,63 +272,6 @@ class Input extends Component {
           >
             Customize Layout Colors
           </Button>
-
-          <Nav className="ml-auto">
-            {this.state.googleLoggedIn ? (
-              <Container>
-                <img
-                  className="nav-img"
-                  src={this.state.GoogleLoginResponse.profileObj.imageUrl}
-                  height="40"
-                  width="40"
-                  alt="img"
-                />
-                <NavDropdown
-                  title={this.state.GoogleLoginResponse.profileObj.email}
-                  variant="secondary"
-                  onClick=""
-                >
-                  <NavDropdown.Item>
-                    <Link
-                      to={{
-                        pathname: 'Profile',
-                        state: {
-                          googleLoggedIn: this.state.googleLoggedIn,
-                          GoogleLoginResponse: this.state.GoogleLoginResponse,
-                        },
-                      }}
-                    >
-                      Profile
-                    </Link>
-                  </NavDropdown.Item>
-
-                  <GoogleLogout
-                    clientId="1097939992919-lftp3shqik60gl553d4m4rdm9efijttm.apps.googleusercontent.com"
-                    render={(renderProps) => (
-                      <NavDropdown.Item
-                        onClick={renderProps.onClick}
-                        disabled={renderProps.disabled}
-                      >
-                        Logout
-                      </NavDropdown.Item>
-                    )}
-                    buttonText="Logout"
-                    onLogoutSuccess={this.googleLogout}
-                  ></GoogleLogout>
-                </NavDropdown>
-              </Container>
-            ) : (
-              <GoogleLogin
-                clientId="1097939992919-lftp3shqik60gl553d4m4rdm9efijttm.apps.googleusercontent.com"
-                buttonText="Login"
-                onSuccess={this.googleLogin}
-                onFailure={this.googleLoginFailure}
-                isSignedIn={true}
-                cookiePolicy={'single_host_origin'}
-                redirectUri="https://www.google.com/"
-              />
-            )}
-          </Nav>
         </Navbar>
 
         {/*
@@ -458,6 +375,13 @@ class Input extends Component {
 
               {this.state.validChannels.length > 4 ? (
                 <Form>
+                  <Form.Check
+                    type="checkbox"
+                    label="Add buttons to swap streams?"
+                    id="btn"
+                    name="btnCheckbox"
+                    onClick={(event) => this.handleBtnCheckboxToggle(event)}
+                  ></Form.Check>
                   {
                     /*
                      * Links to component without buttons when checkbox is selected
@@ -468,6 +392,7 @@ class Input extends Component {
                       to={{
                         pathname: `/FourStreamLayout`,
                         search: `?streams=${this.state.validChannels}`,
+                        btn: this.state.btnToggle,
                       }}
                     >
                       <Button variant="secondary" className="buildStreamBtn">

@@ -20,6 +20,17 @@ class ThreeStreamLayout extends Component {
     this.changeRacer = this.changeRacer.bind(this);
   }
 
+  componentDidMount() {
+    document.body.style.backgroundColor = this.props.location.background;
+
+    window.addEventListener('resize', this.updateDimensions);
+    document.body.className = 'body-no-button-layout';
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
+  }
+
   parseQueryString() {
     let query = this.props.location.search;
     query = query.replace('?streams=', '');

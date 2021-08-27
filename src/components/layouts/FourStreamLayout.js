@@ -23,6 +23,13 @@ class FourStreamLayout extends Component {
 
   componentDidMount() {
     document.body.style.backgroundColor = this.props.location.background;
+
+    window.addEventListener('resize', this.updateDimensions);
+    document.body.className = 'body-no-button-layout';
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
   }
 
   parseQueryString() {

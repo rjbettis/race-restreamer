@@ -19,6 +19,17 @@ class TwoStreamLayout extends Component {
     this.changeRacer = this.changeRacer.bind(this);
   }
 
+  componentDidMount() {
+    document.body.style.backgroundColor = this.props.location.background;
+
+    window.addEventListener('resize', this.updateDimensions);
+    document.body.className = 'body-no-button-layout';
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
+  }
+
   /*
    * Parse search prop provided by react router
    */
